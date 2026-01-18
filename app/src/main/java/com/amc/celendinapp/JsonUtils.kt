@@ -9,6 +9,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken // Import correcto para GSON
 import java.text.SimpleDateFormat
 import java.util.Date
+import androidx.core.content.edit
 
 object JsonUtils {
 
@@ -91,14 +92,14 @@ object VisitaManager {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val actuales = obtenerVisitados(context).toMutableSet()
         actuales.add(id)
-        prefs.edit().putStringSet(KEY_VISITADOS, actuales).apply()
+        prefs.edit { putStringSet(KEY_VISITADOS, actuales) }
     }
 
     fun quitarVisita(context: Context, id: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val actuales = obtenerVisitados(context).toMutableSet()
         actuales.remove(id)
-        prefs.edit().putStringSet(KEY_VISITADOS, actuales).apply()
+        prefs.edit { putStringSet(KEY_VISITADOS, actuales) }
     }
 
     fun obtenerVisitados(context: Context): Set<String> {
@@ -108,6 +109,6 @@ object VisitaManager {
 
     fun borrarTodasLasVisitas(context: Context) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        prefs.edit().remove(KEY_VISITADOS).apply()
+        prefs.edit { remove(KEY_VISITADOS) }
     }
 }
