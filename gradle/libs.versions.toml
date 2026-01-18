@@ -38,7 +38,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonV" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitV" }
 convertergson= { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gsonV" }
 browser = { group = "androidx.browser", name = "browser", version.ref = "browserV" }
-iconos = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "iconosV" }
+iconos = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "iconosV" }
 material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 [plugins]
