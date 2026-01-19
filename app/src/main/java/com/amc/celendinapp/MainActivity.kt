@@ -3,6 +3,7 @@ package com.amc.celendinapp
 // --- IMPORTS ORGANIZADOS ---
 import android.os.Bundle
 import android.content.Context
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -78,6 +79,7 @@ fun MainAppContainer() {
                 while (hayMasDatos) {
                     mensajeCarga += "Recibiendo página $paginaActual...\n"
                     val respuesta = RetrofitClient.instancia.obtenerInstalaciones(pagina = paginaActual)
+                    Log.d("API_SUCCESS", "Datos recibidos: ${respuesta.instalaciones.size}")
                     if (respuesta.instalaciones.isNotEmpty()) {
                         listaAcumulada.addAll(respuesta.instalaciones.map { it.toCliente() })
                         if (respuesta.instalaciones.size < 100) hayMasDatos = false else paginaActual++
@@ -86,6 +88,9 @@ fun MainAppContainer() {
                 listaMutable = listaAcumulada
                 JsonUtils.guardarCacheLocal(context, listaAcumulada, "cache_clientes.json")
             } catch (e: Exception) {
+                // AQUÍ ES DONDE VEREMOS EL ERROR REAL EN EL LOGCAT
+                Log.e("API_ERROR", "Fallo total en la petición: ${e.message}")
+                e.printStackTrace()
                 listaMutable = JsonUtils.leerCacheLocal(context, "cache_clientes.json") ?: emptyList()
                 mensajeCarga = "Error de red. Usando respaldo local."
                 delay(2000)

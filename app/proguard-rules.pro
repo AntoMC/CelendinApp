@@ -1,21 +1,24 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# 1. REGLA MAESTRA PARA EL ERROR DE CASTING
+-keepattributes Signature, *Annotation*, InnerClasses, EnclosingMethod, MethodParameters
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# 2. Impedir que R8 toque tus modelos y la interfaz de red
+-keep class com.amc.celendinapp.model.** { *; }
+-keep interface com.amc.celendinapp.network.** { *; }
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# 3. Reglas específicas para que Retrofit y GSON vean los tipos genéricos
+-keep class retrofit2.** { *; }
+-keep class com.google.gson.** { *; }
+-keep class com.google.gson.reflect.TypeToken { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# 4. Forzar que NO se borren los tipos de las listas en las respuestas de la API
+-keepclassmembers class com.amc.celendinapp.model.RespuestaAdinelsa {
+    <fields>;
+}
+
+# 5. Mantener los nombres de los parámetros (n_idgen_grupo, etc.)
+-keepclassmembers interface com.amc.celendinapp.network.AdinelsaApiService {
+    <methods>;
+}
+
+# 6. Evitar que se borre el soporte de reflexión
+-keep class java.lang.reflect.ParameterizedType { *; }

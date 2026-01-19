@@ -16,17 +16,30 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        resourceConfigurations += "es"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true    // Elimina código que no usas
-            isShrinkResources = true // Elimina imágenes o iconos que no usas
+            isMinifyEnabled = true
+            isShrinkResources = true
+
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
+                // Usamos el archivo estándar en lugar del 'optimize' para asegurar compatibilidad
+                getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug") //
+            // Añade esta línea si usas Kotlin (ayuda con la reflexión)
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"))
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+
+
+    // Opcional: Esto ayuda a que el APK sea aún más pequeño filtrando procesadores
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
     compileOptions {
@@ -39,6 +52,15 @@ android {
     buildFeatures {
         compose = true
     }
+    splits {
+        abi {
+            isEnable = true // Activa la división por arquitectura
+            reset() // Limpia las configuraciones por defecto
+            // Añade solo las que necesites (arm64 es la más común hoy)
+            include("armeabi-v7a", "arm64-v8a")
+            isUniversalApk = false // No crees un APK gordo con todo
+        }
+    }
 }
 
 dependencies {
@@ -46,25 +68,21 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.androidx.compose.bom)) // El jefe que controla pesos
+
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.foundation.layout)
-    implementation(libs.firebase.crashlytics.buildtools)
-    implementation(libs.gson)
+
+    // ICONOS LIGEROS
+    implementation(libs.iconos.core)
+
+    // RED Y DATOS
     implementation(libs.retrofit)
-    implementation(libs.convertergson)
+    implementation(libs.converter.gson)
+    implementation(libs.gson)
     implementation(libs.browser)
-    implementation(libs.iconos)
-    implementation(libs.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 
 }

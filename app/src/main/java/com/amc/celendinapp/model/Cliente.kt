@@ -1,25 +1,28 @@
 package com.amc.celendinapp.model
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+@Keep
 data class Cliente(
-    val CÓDIGO_DE_SUMINISTRO2: String,
-    val NOMBRES: String,
-    val APELLIDO_PATERNO: String,
-    val APELLIDO_MATERNO: String,
-    val N__DNI: String,
-    val LOCALIDAD: String,
-    val DISTRITO: String,
-    val LATITUD2: String,
-    val LONGITUD2: String,
-    val ESTADO__SFD2: String,
-    var isVisitado: Boolean = false
+    @SerializedName("codigo_suministro") val CÓDIGO_DE_SUMINISTRO2: String,
+    @SerializedName("nombres") val NOMBRES: String,
+    @SerializedName("apellido_p") val APELLIDO_PATERNO: String,
+    @SerializedName("apellido_m") val APELLIDO_MATERNO: String,
+    @SerializedName("dni") val N__DNI: String,
+    @SerializedName("localidad") val LOCALIDAD: String,
+    @SerializedName("distrito") val DISTRITO: String,
+    @SerializedName("latitud") val LATITUD2: String,
+    @SerializedName("longitud") val LONGITUD2: String,
+    @SerializedName("estado") val ESTADO__SFD2: String,
+    @SerializedName("is_visitado") var isVisitado: Boolean = false
 )
 
-
+// RespuestaAdinelsa también necesita protección
+@Keep
 data class RespuestaAdinelsa(
-    val size: Int,
-    val instalaciones: List<InstalacionApi>
+    @SerializedName("size") val size: Int,
+    @SerializedName("instalaciones") val instalaciones: List<InstalacionApi>
 )
-
+@Keep
 data class InstalacionApi(
     @SerializedName("c_codigosuministro") val suministro: String,
     @SerializedName("c_nombrepersona") val nombreCompleto: String,
@@ -28,7 +31,7 @@ data class InstalacionApi(
     @SerializedName("c_longitud") val lon: String,
     @SerializedName("c_centropoblado") val centroPoblado: String,
     @SerializedName("c_distrito") val distrito: String,
-    @SerializedName("b_activo") val estaActivo: Boolean // <--- Agregamos esto
+    @SerializedName("b_activo") val estaActivo: Boolean
 )
 
 // --- EL TRADUCTOR (Función de extensión) ---

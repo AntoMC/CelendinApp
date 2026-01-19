@@ -1,5 +1,7 @@
 package com.amc.celendinapp.network
 
+import android.util.Log
+import androidx.annotation.Keep
 import com.amc.celendinapp.model.RespuestaAdinelsa
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,7 +13,7 @@ import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
-
+@Keep
 interface AdinelsaApiService {
     @GET("api/movil/getinstalacionpaginado")
     suspend fun obtenerInstalaciones(
@@ -45,12 +47,18 @@ object RetrofitClient {
         }
     }
 
+    // En tu RetrofitClient donde haces el .build()
     val instancia: AdinelsaApiService by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(getUnsafeOkHttpClient()) // <--- Aquí inyectamos el permiso especial
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(AdinelsaApiService::class.java)
+        try {
+            Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(getUnsafeOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(AdinelsaApiService::class.java)
+        } catch (e: Exception) {
+            Log.e("RETROFIT_ERROR", "Error creando instancia: ${e.message}")
+            throw e
+        }
     }
 }

@@ -1,0 +1,26 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_aspa_check
+drawable ic_check_circle_outline
+drawable ic_delete
+drawable ic_home
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable ic_nube
+drawable ic_pin_mapa
+drawable ic_whatsapp
+mipmap ic_launcher
+mipmap ic_launcher_foreground
+mipmap ic_launcher_round
+string app_name
+style Theme.CelendinApp
+xml backup_rules
+xml data_extraction_rules
+xml network_security_config
