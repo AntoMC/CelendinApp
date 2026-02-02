@@ -69,7 +69,7 @@ fun MainAppContainer() {
     // Función de carga masiva
     fun ejecutarCargaDatos() {
         estaCargando = true
-        mensajeCarga = "Iniciando descarga masiva de Adinelsa... \n"
+        mensajeCarga = "Iniciando descarga masiva del servidor... \n"
         scope.launch {
             try {
                 val listaAcumulada = mutableListOf<Cliente>()
@@ -172,33 +172,41 @@ fun CelendinDrawerWrapper(
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet {
-                HeaderDrawer(
-                    tieneVisitados = visitadosIds.isNotEmpty(),
-                    onDeleteAllClick = { showDeleteAllDialog = true },
-                    onRefreshClick = { showUpdateDialog = true }
-                )
-                LazyColumn {
-                    items(listaDistritos) { distrito ->
-                        val cantidad = if (distrito == "Todos") clientes.size else conteoPorDistrito[distrito] ?: 0
-                        NavigationDrawerItem(
-                            label = {
-                                Row(Modifier.fillMaxWidth(), Arrangement.SpaceBetween) {
-                                    Text(distrito)
-                                    Badge(containerColor = Color(0xFF575775)) { Text("$cantidad", color = Color.White) }
-                                }
-                            },
-                            selected = distrito == distritoSeleccionado,
-                            onClick = {
-                                distritoSeleccionado = distrito
-                                scope.launch { drawerState.close() }
-                            },
-                            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
-                        )
+        drawerContent =
+            {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(0.75f) //ancho en la pantalla
+                ){
+                ModalDrawerSheet {
+                    HeaderDrawer(
+                        tieneVisitados = visitadosIds.isNotEmpty(),
+                        onDeleteAllClick = { showDeleteAllDialog = true },
+                        onRefreshClick = { showUpdateDialog = true }
+                    )
+                    LazyColumn {
+                        items(listaDistritos) { distrito ->
+                            val cantidad = if (distrito == "Todos") clientes.size else conteoPorDistrito[distrito] ?: 0
+                            NavigationDrawerItem(
+                                label = {
+                                    Row(Modifier.fillMaxWidth(), Arrangement.SpaceBetween) {
+                                        Text(distrito)
+                                        Badge(containerColor = Color(0xFF575775)) { Text("$cantidad", color = Color.White) }
+                                    }
+                                },
+                                selected = distrito == distritoSeleccionado,
+                                onClick = {
+                                    distritoSeleccionado = distrito
+                                    scope.launch { drawerState.close() }
+                                },
+                                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                            )
+                        }
                     }
                 }
             }
+
         }
     ) {
         val filtradosPorDistrito = if (distritoSeleccionado == "Todos") clientes
@@ -420,12 +428,12 @@ fun HeaderTitle(
     if (!searching) {
         Column {
             Text(distrito, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-            Text("$total registros", color = Color.LightGray, fontSize = 11.sp)
+            Text("$total registros", color = Color.LightGray, fontSize = 12.sp)
         }
     } else {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().height(56.dp).padding(vertical = 4.dp)
+            modifier = Modifier.fillMaxWidth().height(56.dp).padding(vertical = 0.dp)
         ) {
             OutlinedTextField(
                 value = textoBusqueda,
@@ -433,7 +441,7 @@ fun HeaderTitle(
                 placeholder = { Text("Buscar...", color = Color.Gray, fontSize = 14.sp) },
                 modifier = Modifier.weight(1f).fillMaxHeight(),
                 singleLine = true,
-                shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(10.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFF1E1E1E), // Fondo oscuro
                     unfocusedContainerColor = Color(0xFF1E1E1E),
