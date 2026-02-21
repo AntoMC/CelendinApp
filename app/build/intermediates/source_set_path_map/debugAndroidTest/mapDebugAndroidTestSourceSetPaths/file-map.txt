@@ -1,0 +1,4 @@
+com.amc.celendinapp.test.app-androidTest-0 C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\build\generated\res\resValues\androidTest\debug
+com.amc.celendinapp.test.app-mergeDebugAndroidTestResources-1 C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.amc.celendinapp.test.app-mergeDebugAndroidTestResources-2 C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.amc.celendinapp.test.app-debugAndroidTest-3 C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

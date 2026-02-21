@@ -28,6 +28,6 @@
       applicationId="com.amc.celendinapp"
       generatedSourceFolders="build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="C:\Users\antonio\.gradle\caches\8.13\transforms\60e2c53e5cd60493c8bd8ee5ed94c67b\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="C:\Users\antonio\.gradle\caches\8.13\transforms\260b5cdb3f78eb8b82e36f002c64418c\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>

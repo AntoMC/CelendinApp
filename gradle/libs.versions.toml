@@ -12,7 +12,7 @@ foundationLayout = "1.10.0"
 gsonV = "2.10.1"
 browserV = "1.8.0"
 retrofitV = "2.9.0"
-
+locationV ="21.0.1"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,6 +30,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonV" }
+location ={ group = "com.google.android.gms", name="play-services-location", version.ref = "locationV"}
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitV" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitV" }
 browser = { group = "androidx.browser", name = "browser", version.ref = "browserV" }

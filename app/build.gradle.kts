@@ -83,6 +83,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.gson)
+    implementation(libs.location)
     implementation(libs.browser)
-
 }
