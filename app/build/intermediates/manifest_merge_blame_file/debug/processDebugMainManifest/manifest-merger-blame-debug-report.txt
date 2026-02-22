@@ -9,161 +9,209 @@
 9        android:targetSdkVersion="36" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:4:5-67
-11-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:4:22-64
-12
-13    <permission
-13-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\68c342ce0bc8cc8b14e7ebeac44a4e94\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
-14        android:name="com.amc.celendinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-14-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\68c342ce0bc8cc8b14e7ebeac44a4e94\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
-15        android:protectionLevel="signature" />
-15-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\68c342ce0bc8cc8b14e7ebeac44a4e94\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
-16
-17    <uses-permission android:name="com.amc.celendinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-17-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\68c342ce0bc8cc8b14e7ebeac44a4e94\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
-17-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\68c342ce0bc8cc8b14e7ebeac44a4e94\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
-18
-19    <application
-19-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:5:5-27:19
-20        android:allowBackup="true"
-20-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:6:9-35
-21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-21-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\68c342ce0bc8cc8b14e7ebeac44a4e94\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
-22        android:dataExtractionRules="@xml/data_extraction_rules"
-22-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:7:9-65
-23        android:debuggable="true"
-24        android:extractNativeLibs="false"
-25        android:fullBackupContent="@xml/backup_rules"
-25-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:8:9-54
-26        android:icon="@mipmap/ic_launcher"
-26-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:9:9-43
-27        android:label="@string/app_name"
-27-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:10:9-41
-28        android:networkSecurityConfig="@xml/network_security_config"
-28-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:14:9-69
-29        android:roundIcon="@mipmap/ic_launcher_round"
-29-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:11:9-54
-30        android:supportsRtl="true"
-30-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:12:9-35
-31        android:theme="@style/Theme.CelendinApp"
-31-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:15:9-49
-32        android:usesCleartextTraffic="true" >
-32-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:13:9-44
-33        <activity
-33-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:16:9-26:20
-34            android:name="com.amc.celendinapp.MainActivity"
-34-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:17:13-41
-35            android:exported="true"
-35-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:18:13-36
-36            android:label="@string/app_name"
-36-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:19:13-45
-37            android:theme="@style/Theme.CelendinApp" >
-37-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:20:13-53
-38            <intent-filter>
-38-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:21:13-25:29
-39                <action android:name="android.intent.action.MAIN" />
-39-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:22:17-69
-39-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:22:25-66
-40
-41                <category android:name="android.intent.category.LAUNCHER" />
-41-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:24:17-77
-41-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:24:27-74
-42            </intent-filter>
-43        </activity>
-44        <activity
-44-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7ed932476ac9aeb793810615886a6bfd\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
-45            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-45-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7ed932476ac9aeb793810615886a6bfd\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
-46            android:exported="false"
-46-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7ed932476ac9aeb793810615886a6bfd\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
-47            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-47-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7ed932476ac9aeb793810615886a6bfd\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+11-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:6:5-79
+12-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:7:5-81
+13-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:7:22-78
+14
+15    <!-- Include required permissions for Google Maps API to run. -->
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:20:5-78
+16-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:20:22-76
+17
+18    <uses-feature
+18-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:22:5-24:33
+19        android:glEsVersion="0x00020000"
+19-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:23:8-40
+20        android:required="true" />
+20-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:24:8-31
+21
+22    <queries>
+22-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:27:5-30:15
+23
+24        <!-- Needs to be explicitly declared on Android R+ -->
+25        <package android:name="com.google.android.apps.maps" />
+25-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:29:7-61
+25-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7f1979110c1c2d88d3ecad44e3f48796\transformed\play-services-maps-20.0.0\AndroidManifest.xml:29:16-59
+26    </queries>
+27
+28    <permission
+28-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\0ab5e001a43ca20db0012d340f7492d8\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
+29        android:name="com.amc.celendinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+29-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\0ab5e001a43ca20db0012d340f7492d8\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
+30        android:protectionLevel="signature" />
+30-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\0ab5e001a43ca20db0012d340f7492d8\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
+31
+32    <uses-permission android:name="com.amc.celendinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+32-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\0ab5e001a43ca20db0012d340f7492d8\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
+32-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\0ab5e001a43ca20db0012d340f7492d8\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
+33
+34    <application
+34-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:9:5-36:19
+35        android:allowBackup="true"
+35-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:10:9-35
+36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+36-->[androidx.core:core:1.17.0] C:\Users\antonio\.gradle\caches\8.13\transforms\0ab5e001a43ca20db0012d340f7492d8\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
+37        android:dataExtractionRules="@xml/data_extraction_rules"
+37-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:11:9-65
+38        android:debuggable="true"
+39        android:extractNativeLibs="false"
+40        android:fullBackupContent="@xml/backup_rules"
+40-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:12:9-54
+41        android:icon="@mipmap/ic_launcher"
+41-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:13:9-43
+42        android:label="@string/app_name"
+42-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:14:9-41
+43        android:networkSecurityConfig="@xml/network_security_config"
+43-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:18:9-69
+44        android:roundIcon="@mipmap/ic_launcher_round"
+44-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:15:9-54
+45        android:supportsRtl="true"
+45-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:16:9-35
+46        android:theme="@style/Theme.CelendinApp"
+46-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:19:9-49
+47        android:usesCleartextTraffic="true" >
+47-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:17:9-44
 48
-49        <meta-data
-49-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7e845559787b548cb3752a934c7eb45f\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
-50            android:name="com.google.android.gms.version"
-50-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7e845559787b548cb3752a934c7eb45f\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
-51            android:value="@integer/google_play_services_version" />
-51-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7e845559787b548cb3752a934c7eb45f\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
-52
-53        <uses-library
-53-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\db15830a7121dc0a61eacd21fc0b106e\transformed\window-1.5.0\AndroidManifest.xml:23:9-25:40
-54            android:name="androidx.window.extensions"
-54-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\db15830a7121dc0a61eacd21fc0b106e\transformed\window-1.5.0\AndroidManifest.xml:24:13-54
-55            android:required="false" />
-55-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\db15830a7121dc0a61eacd21fc0b106e\transformed\window-1.5.0\AndroidManifest.xml:25:13-37
-56        <uses-library
-56-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\db15830a7121dc0a61eacd21fc0b106e\transformed\window-1.5.0\AndroidManifest.xml:26:9-28:40
-57            android:name="androidx.window.sidecar"
-57-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\db15830a7121dc0a61eacd21fc0b106e\transformed\window-1.5.0\AndroidManifest.xml:27:13-51
-58            android:required="false" />
-58-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\db15830a7121dc0a61eacd21fc0b106e\transformed\window-1.5.0\AndroidManifest.xml:28:13-37
-59
-60        <provider
-60-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
-61            android:name="androidx.startup.InitializationProvider"
-61-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
-62            android:authorities="com.amc.celendinapp.androidx-startup"
-62-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
-63            android:exported="false" >
-63-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
-64            <meta-data
-64-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
-65                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-65-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
-66                android:value="androidx.startup" />
-66-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\a3a7660eafd22d89a984c3913ad01823\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
-67            <meta-data
-67-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\antonio\.gradle\caches\8.13\transforms\32bb475ae0913914405ea1ab276715e7\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:29:13-31:52
-68                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-68-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\antonio\.gradle\caches\8.13\transforms\32bb475ae0913914405ea1ab276715e7\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:30:17-78
-69                android:value="androidx.startup" />
-69-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\antonio\.gradle\caches\8.13\transforms\32bb475ae0913914405ea1ab276715e7\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:31:17-49
+49        <!-- La clave se inyecta desde local.properties a través de build.gradle.kts -->
+50        <meta-data
+51            android:name="com.google.android.geo.API_KEY"
+51-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:23:13-58
+52            android:value="AIzaSyBGGjL0udDhD4VCGA5gvq24KaPYKANeosw" />
+52-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:24:13-44
+53
+54        <activity
+54-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:26:9-35:20
+55            android:name="com.amc.celendinapp.MainActivity"
+55-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:27:13-41
+56            android:exported="true"
+56-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:28:13-36
+57            android:label="@string/app_name"
+57-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:29:13-45
+58            android:theme="@style/Theme.CelendinApp" >
+58-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:30:13-53
+59            <intent-filter>
+59-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:31:13-34:29
+60                <action android:name="android.intent.action.MAIN" />
+60-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:32:17-69
+60-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:32:25-66
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:33:17-77
+62-->C:\Users\antonio\AndroidStudioProjects\CelendinApp\app\src\main\AndroidManifest.xml:33:27-74
+63            </intent-filter>
+64        </activity>
+65
+66        <provider
+66-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:24:9-32:20
+67            android:name="androidx.startup.InitializationProvider"
+67-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:25:13-67
+68            android:authorities="com.amc.celendinapp.androidx-startup"
+68-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:26:13-68
+69            android:exported="false" >
+69-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:27:13-37
 70            <meta-data
-70-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
-71                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-71-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+70-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:29:13-31:52
+71                android:name="com.google.maps.android.compose.utils.attribution.AttributionIdInitializer"
+71-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:30:17-106
 72                android:value="androidx.startup" />
-72-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
-73        </provider>
-74
-75        <receiver
-75-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
-76            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-76-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
-77            android:directBootAware="false"
-77-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
-78            android:enabled="true"
-78-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
-79            android:exported="true"
-79-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
-80            android:permission="android.permission.DUMP" >
-80-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
-81            <intent-filter>
-81-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
-82                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-82-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
-82-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
-83            </intent-filter>
-84            <intent-filter>
-84-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
-85                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-85-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
-85-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
-86            </intent-filter>
-87            <intent-filter>
-87-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
-88                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-88-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
-88-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
-89            </intent-filter>
-90            <intent-filter>
-90-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
-91                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-91-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
-91-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\73ba0448040d425832d90dc2f25cc7ea\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
-92            </intent-filter>
-93        </receiver>
-94    </application>
+72-->[com.google.maps.android:maps-compose:8.1.0] C:\Users\antonio\.gradle\caches\8.13\transforms\7910f3dcdb5a50e763ddcc63de1a564a\transformed\maps-compose-8.1.0\AndroidManifest.xml:31:17-49
+73            <meta-data
+73-->[com.google.maps.android:maps-ktx:6.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\f30e1aa9bf8ef294712ff1287d55e2c2\transformed\maps-ktx-6.0.0\AndroidManifest.xml:30:13-32:52
+74                android:name="com.google.maps.android.ktx.utils.attribution.AttributionIdInitializer"
+74-->[com.google.maps.android:maps-ktx:6.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\f30e1aa9bf8ef294712ff1287d55e2c2\transformed\maps-ktx-6.0.0\AndroidManifest.xml:31:17-102
+75                android:value="androidx.startup" />
+75-->[com.google.maps.android:maps-ktx:6.0.0] C:\Users\antonio\.gradle\caches\8.13\transforms\f30e1aa9bf8ef294712ff1287d55e2c2\transformed\maps-ktx-6.0.0\AndroidManifest.xml:32:17-49
+76            <meta-data
+76-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\f11640294202f9021179dc450bcdaad6\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+77                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+77-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\f11640294202f9021179dc450bcdaad6\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+78                android:value="androidx.startup" />
+78-->[androidx.emoji2:emoji2:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\f11640294202f9021179dc450bcdaad6\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+79            <meta-data
+79-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\antonio\.gradle\caches\8.13\transforms\0cabfd8952b85d9f1285de3c19f082cd\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:29:13-31:52
+80                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+80-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\antonio\.gradle\caches\8.13\transforms\0cabfd8952b85d9f1285de3c19f082cd\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:30:17-78
+81                android:value="androidx.startup" />
+81-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\antonio\.gradle\caches\8.13\transforms\0cabfd8952b85d9f1285de3c19f082cd\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:31:17-49
+82            <meta-data
+82-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+83                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+83-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+84                android:value="androidx.startup" />
+84-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+85        </provider>
+86
+87        <activity
+87-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\d82784ef72525aced410087c0cbc0f8e\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+88            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+88-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\d82784ef72525aced410087c0cbc0f8e\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
+89            android:exported="false"
+89-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\d82784ef72525aced410087c0cbc0f8e\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
+90            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+90-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\d82784ef72525aced410087c0cbc0f8e\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
+91
+92        <meta-data
+92-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\antonio\.gradle\caches\8.13\transforms\ebc5688ab28d0c1ce64cc1273fb48496\transformed\play-services-basement-18.9.0\AndroidManifest.xml:21:9-23:69
+93            android:name="com.google.android.gms.version"
+93-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\antonio\.gradle\caches\8.13\transforms\ebc5688ab28d0c1ce64cc1273fb48496\transformed\play-services-basement-18.9.0\AndroidManifest.xml:22:13-58
+94            android:value="@integer/google_play_services_version" />
+94-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\antonio\.gradle\caches\8.13\transforms\ebc5688ab28d0c1ce64cc1273fb48496\transformed\play-services-basement-18.9.0\AndroidManifest.xml:23:13-66
 95
-96</manifest>
+96        <uses-library
+96-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\8af5da5f6169ccb1e991e40fafeba909\transformed\window-1.5.0\AndroidManifest.xml:23:9-25:40
+97            android:name="androidx.window.extensions"
+97-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\8af5da5f6169ccb1e991e40fafeba909\transformed\window-1.5.0\AndroidManifest.xml:24:13-54
+98            android:required="false" />
+98-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\8af5da5f6169ccb1e991e40fafeba909\transformed\window-1.5.0\AndroidManifest.xml:25:13-37
+99        <uses-library
+99-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\8af5da5f6169ccb1e991e40fafeba909\transformed\window-1.5.0\AndroidManifest.xml:26:9-28:40
+100            android:name="androidx.window.sidecar"
+100-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\8af5da5f6169ccb1e991e40fafeba909\transformed\window-1.5.0\AndroidManifest.xml:27:13-51
+101            android:required="false" />
+101-->[androidx.window:window:1.5.0] C:\Users\antonio\.gradle\caches\8.13\transforms\8af5da5f6169ccb1e991e40fafeba909\transformed\window-1.5.0\AndroidManifest.xml:28:13-37
+102
+103        <receiver
+103-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+104            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+104-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+105            android:directBootAware="false"
+105-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+106            android:enabled="true"
+106-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+107            android:exported="true"
+107-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+108            android:permission="android.permission.DUMP" >
+108-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+109            <intent-filter>
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+110                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+110-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+110-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+111            </intent-filter>
+112            <intent-filter>
+112-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+113                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+113-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+113-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+114            </intent-filter>
+115            <intent-filter>
+115-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+116                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+116-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+116-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+117            </intent-filter>
+118            <intent-filter>
+118-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+119                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+119-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+119-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\antonio\.gradle\caches\8.13\transforms\884dcb9fba97dc129659d7da0ac700a5\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+120            </intent-filter>
+121        </receiver>
+122    </application>
+123
+124</manifest>

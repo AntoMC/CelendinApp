@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
     <attr format="color" name="animationBackgroundColor"/>
-    <attr format="reference" name="coordinatorLayoutStyle"/>
     <attr format="enum" name="finishPrimaryWithPlaceholder">
         
         <enum name="always" value="1"/>
@@ -172,6 +171,7 @@
     <item name="is_pooling_container_tag" type="id"/>
     <item name="line1" type="id"/>
     <item name="line3" type="id"/>
+    <item name="maps_compose_nodraw_container_view" type="id"/>
     <item name="parent_matrix" type="id"/>
     <item name="pooling_container_listener_holder_tag" type="id"/>
     <item name="report_drawn" type="id"/>
@@ -297,10 +297,15 @@
     <string name="m3c_dropdown_menu_collapsed">Collapsed</string>
     <string name="m3c_dropdown_menu_expanded">Expanded</string>
     <string name="m3c_dropdown_menu_toggle">Toggle dropdown menu</string>
+    <string name="m3c_floating_toolbar_collapse">Collapse toolbar</string>
+    <string name="m3c_floating_toolbar_expand">Expand toolbar</string>
     <string name="m3c_search_bar_search">Search</string>
     <string name="m3c_snackbar_dismiss">Dismiss</string>
+    <string name="m3c_snackbar_pane_title">Alert</string>
     <string name="m3c_suggestions_available">Suggestions below</string>
+    <string name="m3c_time_input_dialog_title">Enter Time</string>
     <string name="m3c_time_picker_am">AM</string>
+    <string name="m3c_time_picker_dialog_title">Select Time</string>
     <string name="m3c_time_picker_hour">Hour</string>
     <string name="m3c_time_picker_hour_24h_suffix">%1$d hours</string>
     <string name="m3c_time_picker_hour_selection">Select hour</string>
@@ -312,8 +317,12 @@
     <string name="m3c_time_picker_minute_text_field">for minutes</string>
     <string name="m3c_time_picker_period_toggle_description">Select AM or PM</string>
     <string name="m3c_time_picker_pm">PM</string>
+    <string name="m3c_time_picker_toggle_keyboard">Switch to text input mode for the time input</string>
+    <string name="m3c_time_picker_toggle_touch">Switch to clock mode for the time input</string>
     <string name="m3c_tooltip_long_press_label">Show tooltip</string>
     <string name="m3c_tooltip_pane_description">Tooltip</string>
+    <string name="m3c_wide_navigation_rail_close_rail">"Close rail"</string>
+    <string name="m3c_wide_navigation_rail_pane_title">"Navigation rail"</string>
     <string name="navigation_menu">"Navigation menu"</string>
     <string name="not_selected">Not selected</string>
     <string name="range_end">"Range end"</string>
@@ -333,6 +342,7 @@
         <item name="android:windowClipToOutline">false</item>
     </style>
     <style name="EdgeToEdgeFloatingDialogTheme" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowLayoutInDisplayCutoutMode" ns2:targetApi="27">@integer/m3c_window_layout_in_display_cutout_mode</item>
         <item name="android:windowClipToOutline">false</item>
         <item name="android:windowIsFloating">false</item>
@@ -363,9 +373,6 @@
     <style name="Theme.CelendinApp" parent="android:Theme.Material.Light.NoActionBar"/>
     <style name="Widget.Compat.NotificationActionContainer" parent=""/>
     <style name="Widget.Compat.NotificationActionText" parent=""/>
-    <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
-        <item name="statusBarBackground">#000000</item>
-    </style>
     <declare-styleable name="ActivityFilter">
         
         <attr format="string" name="activityName"/>
@@ -392,96 +399,6 @@
         
         <attr format="float" name="lStar"/>
         <attr name="android:lStar"/>
-    </declare-styleable>
-    <declare-styleable name="CoordinatorLayout">
-        
-        <attr format="reference" name="keylines"/>
-        
-        <attr format="color|reference" name="statusBarBackground"/>
-    </declare-styleable>
-    <declare-styleable name="CoordinatorLayout_Layout">
-        <attr name="android:layout_gravity"/>
-        
-        <attr format="string" name="layout_behavior"/>
-        
-        <attr format="reference" name="layout_anchor"/>
-        
-        <attr format="integer" name="layout_keyline"/>
-
-        
-        <attr name="layout_anchorGravity">
-            <!-- Push object to the top of its container, not changing its size. -->
-            <flag name="top" value="0x30"/>
-            <!-- Push object to the bottom of its container, not changing its size. -->
-            <flag name="bottom" value="0x50"/>
-            <!-- Push object to the left of its container, not changing its size. -->
-            <flag name="left" value="0x03"/>
-            <!-- Push object to the right of its container, not changing its size. -->
-            <flag name="right" value="0x05"/>
-            <!-- Place object in the vertical center of its container, not changing its size. -->
-            <flag name="center_vertical" value="0x10"/>
-            <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
-            <flag name="fill_vertical" value="0x70"/>
-            <!-- Place object in the horizontal center of its container, not changing its size. -->
-            <flag name="center_horizontal" value="0x01"/>
-            <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
-            <flag name="fill_horizontal" value="0x07"/>
-            <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
-            <flag name="center" value="0x11"/>
-            <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
-            <flag name="fill" value="0x77"/>
-            <!-- Additional option that can be set to have the top and/or bottom edges of
-                 the child clipped to its container's bounds.
-                 The clip will be based on the vertical gravity: a top gravity will clip the bottom
-                 edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
-            <flag name="clip_vertical" value="0x80"/>
-            <!-- Additional option that can be set to have the left and/or right edges of
-                 the child clipped to its container's bounds.
-                 The clip will be based on the horizontal gravity: a left gravity will clip the right
-                 edge, a right gravity will clip the left edge, and neither will clip both edges. -->
-            <flag name="clip_horizontal" value="0x08"/>
-            <!-- Push object to the beginning of its container, not changing its size. -->
-            <flag name="start" value="0x00800003"/>
-            <!-- Push object to the end of its container, not changing its size. -->
-            <flag name="end" value="0x00800005"/>
-        </attr>
-
-        
-        <attr format="enum" name="layout_insetEdge">
-            <!-- Don't inset. -->
-            <enum name="none" value="0x0"/>
-            <!-- Inset the top edge. -->
-            <enum name="top" value="0x30"/>
-            <!-- Inset the bottom edge. -->
-            <enum name="bottom" value="0x50"/>
-            <!-- Inset the left edge. -->
-            <enum name="left" value="0x03"/>
-            <!-- Inset the right edge. -->
-            <enum name="right" value="0x05"/>
-            <!-- Inset the start edge. -->
-            <enum name="start" value="0x00800003"/>
-            <!-- Inset the end edge. -->
-            <enum name="end" value="0x00800005"/>
-        </attr>
-        
-        <attr name="layout_dodgeInsetEdges">
-            <!-- Don't dodge any edges -->
-            <flag name="none" value="0x0"/>
-            <!-- Dodge the top inset edge. -->
-            <flag name="top" value="0x30"/>
-            <!-- Dodge the bottom inset edge. -->
-            <flag name="bottom" value="0x50"/>
-            <!-- Dodge the left inset edge. -->
-            <flag name="left" value="0x03"/>
-            <!-- Dodge the right inset edge. -->
-            <flag name="right" value="0x05"/>
-            <!-- Dodge the start inset edge. -->
-            <flag name="start" value="0x00800003"/>
-            <!-- Dodge the end inset edge. -->
-            <flag name="end" value="0x00800005"/>
-            <!-- Dodge all the inset edges. -->
-            <flag name="all" value="0x77"/>
-        </attr>
     </declare-styleable>
     <declare-styleable name="DividerAttributes">
         
@@ -617,6 +534,77 @@
 <attr format="float" name="imageAspectRatio"/>
 
 <attr format="boolean" name="circleCrop"/>
+</declare-styleable>
+    <declare-styleable name="MapAttrs"><attr name="mapType">
+<enum name="none" value="0"/>
+
+<enum name="normal" value="1"/>
+
+<enum name="satellite" value="2"/>
+
+<enum name="terrain" value="3"/>
+
+<enum name="hybrid" value="4"/>
+
+</attr>
+
+<attr format="float" name="cameraBearing"/>
+
+<attr format="float" name="cameraTargetLat"/>
+
+<attr format="float" name="cameraTargetLng"/>
+
+<attr format="float" name="cameraTilt"/>
+
+<attr format="float" name="cameraZoom"/>
+
+<attr format="boolean" name="liteMode"/>
+
+<attr format="boolean" name="uiCompass"/>
+
+<attr format="boolean" name="uiRotateGestures"/>
+
+<attr format="boolean" name="uiScrollGestures"/>
+
+<attr format="boolean" name="uiScrollGesturesDuringRotateOrZoom"/>
+
+<attr format="boolean" name="uiTiltGestures"/>
+
+<attr format="boolean" name="uiZoomControls"/>
+
+<attr format="boolean" name="uiZoomGestures"/>
+
+<attr format="boolean" name="useViewLifecycle"/>
+
+<attr format="boolean" name="zOrderOnTop"/>
+
+<attr format="boolean" name="uiMapToolbar"/>
+
+<attr format="boolean" name="ambientEnabled"/>
+
+<attr format="float" name="cameraMinZoomPreference"/>
+
+<attr format="float" name="cameraMaxZoomPreference"/>
+
+<attr format="float" name="latLngBoundsSouthWestLatitude"/>
+
+<attr format="float" name="latLngBoundsSouthWestLongitude"/>
+
+<attr format="float" name="latLngBoundsNorthEastLatitude"/>
+
+<attr format="float" name="latLngBoundsNorthEastLongitude"/>
+
+<attr format="color" name="backgroundColor"/>
+
+<attr format="string" name="mapId"/>
+<attr name="mapColorScheme">
+<enum name="light" value="0"/>
+
+<enum name="dark" value="1"/>
+
+<enum name="follow_system" value="2"/>
+
+</attr>
 </declare-styleable>
     <declare-styleable name="SignInButton"><attr format="reference" name="buttonSize">
 <enum name="standard" value="0"/>

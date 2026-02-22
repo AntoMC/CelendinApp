@@ -63,23 +63,26 @@ fun RadarMinimap(
                         val radioVisual = (size.width.coerceAtMost(size.height) / 2.2f) * escala
 
                         clientesCercanos.forEach { cliente ->
-                            val latCl = cliente.LATITUD2?.toDoubleOrNull() ?: 0.0
-                            val lonCl = cliente.LONGITUD2?.toDoubleOrNull() ?: 0.0
-                            val dist = FloatArray(1)
-                            Location.distanceBetween(miUbicacion.latitude, miUbicacion.longitude, latCl, lonCl, dist)
+                            val latCl = cliente.latitud?.toDoubleOrNull()
+                            val lonCl = cliente.longitud?.toDoubleOrNull()
+                            
+                            if (latCl != null && lonCl != null) {
+                                val dist = FloatArray(1)
+                                Location.distanceBetween(miUbicacion.latitude, miUbicacion.longitude, latCl, lonCl, dist)
 
-                            if (dist[0] <= radioMaximoMetros) {
-                                val bearingAlCliente = miUbicacion.bearingTo(Location("").apply { latitude = latCl; longitude = lonCl })
-                                val anguloFinal = bearingAlCliente - rotacionSuave
-                                val anguloRad = Math.toRadians((anguloFinal - 90).toDouble())
-                                val distV = (dist[0] / radioMaximoMetros) * radioVisual
-                                val cX = centroX + (distV * Math.cos(anguloRad)).toFloat()
-                                val cY = centroY + (distV * Math.sin(anguloRad)).toFloat()
+                                if (dist[0] <= radioMaximoMetros) {
+                                    val bearingAlCliente = miUbicacion.bearingTo(Location("").apply { latitude = latCl; longitude = lonCl })
+                                    val anguloFinal = bearingAlCliente - rotacionSuave
+                                    val anguloRad = Math.toRadians((anguloFinal - 90).toDouble())
+                                    val distV = (dist[0] / radioMaximoMetros) * radioVisual
+                                    val cX = centroX + (distV * Math.cos(anguloRad)).toFloat()
+                                    val cY = centroY + (distV * Math.sin(anguloRad)).toFloat()
 
-                                val dx = tapOffset.x - cX
-                                val dy = tapOffset.y - cY
-                                if (Math.sqrt((dx * dx + dy * dy).toDouble()) < 50.0) {
-                                    clienteSeleccionado = cliente
+                                    val dx = tapOffset.x - cX
+                                    val dy = tapOffset.y - cY
+                                    if (Math.sqrt((dx * dx + dy * dy).toDouble()) < 50.0) {
+                                        clienteSeleccionado = cliente
+                                    }
                                 }
                             }
                         }
@@ -107,38 +110,41 @@ fun RadarMinimap(
 
             // 3. Dibujar Clientes
             clientesCercanos.forEach { cliente ->
-                val latCl = cliente.LATITUD2?.toDoubleOrNull() ?: 0.0
-                val lonCl = cliente.LONGITUD2?.toDoubleOrNull() ?: 0.0
-                val dist = FloatArray(1)
-                Location.distanceBetween(miUbicacion.latitude, miUbicacion.longitude, latCl, lonCl, dist)
+                val latCl = cliente.latitud?.toDoubleOrNull()
+                val lonCl = cliente.longitud?.toDoubleOrNull()
 
-                if (dist[0] <= radioMaximoMetros) {
-                    val bearingAlCliente = miUbicacion.bearingTo(Location("").apply { latitude = latCl; longitude = lonCl })
-                    val anguloFinal = bearingAlCliente - rotacionSuave
-                    val anguloRad = Math.toRadians((anguloFinal - 90).toDouble())
-                    val distV = (dist[0] / radioMaximoMetros) * radioVisual
-                    val posX = centroX + (distV * Math.cos(anguloRad)).toFloat()
-                    val posY = centroY + (distV * Math.sin(anguloRad)).toFloat()
+                if (latCl != null && lonCl != null) {
+                    val dist = FloatArray(1)
+                    Location.distanceBetween(miUbicacion.latitude, miUbicacion.longitude, latCl, lonCl, dist)
 
-                    val esVisitado = visitadosIds.contains(cliente.CÓDIGO_DE_SUMINISTRO2)
+                    if (dist[0] <= radioMaximoMetros) {
+                        val bearingAlCliente = miUbicacion.bearingTo(Location("").apply { latitude = latCl; longitude = lonCl })
+                        val anguloFinal = bearingAlCliente - rotacionSuave
+                        val anguloRad = Math.toRadians((anguloFinal - 90).toDouble())
+                        val distV = (dist[0] / radioMaximoMetros) * radioVisual
+                        val posX = centroX + (distV * Math.cos(anguloRad)).toFloat()
+                        val posY = centroY + (distV * Math.sin(anguloRad)).toFloat()
 
-                    drawCircle(
-                        color = if (esVisitado) Color(0xFF2ECC71) else Color.Red,
-                        radius = 7.dp.toPx(),
-                        center = Offset(posX, posY)
-                    )
+                        val esVisitado = visitadosIds.contains(cliente.codigoSuministro ?: "")
 
-                    if (escala > 1.5f) {
-                        drawContext.canvas.nativeCanvas.drawText(
-                            cliente.CÓDIGO_DE_SUMINISTRO2,
-                            posX, posY - 35f,
-                            Paint().apply {
-                                color = android.graphics.Color.BLACK
-                                textSize = 26f
-                                textAlign = Paint.Align.CENTER
-                                typeface = Typeface.DEFAULT_BOLD
-                            }
+                        drawCircle(
+                            color = if (esVisitado) Color(0xFF2ECC71) else Color.Red,
+                            radius = 7.dp.toPx(),
+                            center = Offset(posX, posY)
                         )
+
+                        if (escala > 1.5f) {
+                            drawContext.canvas.nativeCanvas.drawText(
+                                cliente.codigoSuministro ?: "S/N",
+                                posX, posY - 35f,
+                                Paint().apply {
+                                    color = android.graphics.Color.BLACK
+                                    textSize = 26f
+                                    textAlign = Paint.Align.CENTER
+                                    typeface = Typeface.DEFAULT_BOLD
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -174,8 +180,8 @@ fun RadarMinimap(
     if (clienteSeleccionado != null) {
         AlertDialog(
             onDismissRequest = { clienteSeleccionado = null },
-            title = { Text("Suministro: ${clienteSeleccionado?.CÓDIGO_DE_SUMINISTRO2}") },
-            text = { Text("Nombre: ${clienteSeleccionado?.NOMBRES} ${clienteSeleccionado?.APELLIDO_PATERNO}") },
+            title = { Text("Suministro: ${clienteSeleccionado?.codigoSuministro ?: ""}") },
+            text = { Text("Nombre: ${clienteSeleccionado?.nombres ?: ""} ${clienteSeleccionado?.apellidoPaterno ?: ""}") },
             confirmButton = { TextButton(onClick = { clienteSeleccionado = null }) { Text("OK") } }
         )
     }

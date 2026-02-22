@@ -3,12 +3,20 @@ attr activityAction
 attr activityName
 attr alpha
 attr alwaysExpand
+attr ambientEnabled
 attr animationBackgroundColor
+attr backgroundColor
 attr buttonSize
+attr cameraBearing
+attr cameraMaxZoomPreference
+attr cameraMinZoomPreference
+attr cameraTargetLat
+attr cameraTargetLng
+attr cameraTilt
+attr cameraZoom
 attr circleCrop
 attr clearTop
 attr colorScheme
-attr coordinatorLayoutStyle
 attr dragRangeMaxRatio
 attr dragRangeMinRatio
 attr embeddingDividerColor
@@ -32,14 +40,15 @@ attr fontWeight
 attr imageAspectRatio
 attr imageAspectRatioAdjust
 attr isDraggingToFullscreenAllowed
-attr keylines
 attr lStar
-attr layout_anchor
-attr layout_anchorGravity
-attr layout_behavior
-attr layout_dodgeInsetEdges
-attr layout_insetEdge
-attr layout_keyline
+attr latLngBoundsNorthEastLatitude
+attr latLngBoundsNorthEastLongitude
+attr latLngBoundsSouthWestLatitude
+attr latLngBoundsSouthWestLongitude
+attr liteMode
+attr mapColorScheme
+attr mapId
+attr mapType
 attr nestedScrollViewStyle
 attr placeholderActivityName
 attr primaryActivityName
@@ -58,10 +67,19 @@ attr splitMinSmallestWidthDp
 attr splitMinWidthDp
 attr splitOpenAnimation
 attr splitRatio
-attr statusBarBackground
 attr stickyPlaceholder
 attr tag
 attr ttcIndex
+attr uiCompass
+attr uiMapToolbar
+attr uiRotateGestures
+attr uiScrollGestures
+attr uiScrollGesturesDuringRotateOrZoom
+attr uiTiltGestures
+attr uiZoomControls
+attr uiZoomGestures
+attr useViewLifecycle
+attr zOrderOnTop
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
 color black
@@ -206,7 +224,6 @@ id actions
 id adjacent
 id adjust_height
 id adjust_width
-id all
 id always
 id alwaysAllow
 id alwaysDisallow
@@ -216,19 +233,13 @@ id async
 id auto
 id auto_clear_focus_behavior_tag
 id blocking
-id bottom
 id bottomToTop
 id browser_actions_header_text
 id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
-id center
-id center_horizontal
-id center_vertical
 id chronometer
-id clip_horizontal
-id clip_vertical
 id compose_prefetch_scheduler
 id compose_view_saveable_id_tag
 id consume_window_insets_tag
@@ -236,17 +247,15 @@ id dark
 id dialog_button
 id draggable
 id edit_text_id
-id end
-id fill
-id fill_horizontal
-id fill_vertical
 id fixed
+id follow_system
 id forever
 id ghost_view
 id ghost_view_holder
 id hide_graphics_layer_in_inspector_tag
 id hide_ime_id
 id hide_in_inspector_tag
+id hybrid
 id icon
 id icon_group
 id icon_only
@@ -255,12 +264,12 @@ id inspection_slot_table_set
 id is_pooling_container_tag
 id italic
 id jumpCut
-id left
 id light
 id line1
 id line3
 id locale
 id ltr
+id maps_compose_nodraw_container_view
 id never
 id none
 id normal
@@ -270,14 +279,13 @@ id notification_main_column_container
 id parent_matrix
 id pooling_container_listener_holder_tag
 id report_drawn
-id right
 id right_icon
 id right_side
 id rtl
+id satellite
 id save_non_transition_alpha
 id save_overlay_view
 id standard
-id start
 id systemDefault
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -294,11 +302,11 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id terrain
 id text
 id text2
 id time
 id title
-id top
 id topToBottom
 id transition_clip
 id transition_current_scene
@@ -413,10 +421,15 @@ string m3c_dialog
 string m3c_dropdown_menu_collapsed
 string m3c_dropdown_menu_expanded
 string m3c_dropdown_menu_toggle
+string m3c_floating_toolbar_collapse
+string m3c_floating_toolbar_expand
 string m3c_search_bar_search
 string m3c_snackbar_dismiss
+string m3c_snackbar_pane_title
 string m3c_suggestions_available
+string m3c_time_input_dialog_title
 string m3c_time_picker_am
+string m3c_time_picker_dialog_title
 string m3c_time_picker_hour
 string m3c_time_picker_hour_24h_suffix
 string m3c_time_picker_hour_selection
@@ -428,8 +441,12 @@ string m3c_time_picker_minute_suffix
 string m3c_time_picker_minute_text_field
 string m3c_time_picker_period_toggle_description
 string m3c_time_picker_pm
+string m3c_time_picker_toggle_keyboard
+string m3c_time_picker_toggle_touch
 string m3c_tooltip_long_press_label
 string m3c_tooltip_pane_description
+string m3c_wide_navigation_rail_close_rail
+string m3c_wide_navigation_rail_pane_title
 string navigation_menu
 string not_selected
 string range_end
@@ -457,13 +474,10 @@ style TextAppearance_Compat_Notification_Title
 style Theme_CelendinApp
 style Widget_Compat_NotificationActionContainer
 style Widget_Compat_NotificationActionText
-style Widget_Support_CoordinatorLayout
 styleable ActivityFilter activityAction activityName
 styleable ActivityRule alwaysExpand tag
 styleable Capability queryPatterns shortcutMatchRequired
 styleable ColorStateListItem android_color android_alpha android_lStar alpha lStar
-styleable CoordinatorLayout keylines statusBarBackground
-styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_anchorGravity layout_behavior layout_dodgeInsetEdges layout_insetEdge layout_keyline
 styleable DividerAttributes dragRangeMaxRatio dragRangeMinRatio embeddingDividerColor embeddingDividerType embeddingDividerWidthDp isDraggingToFullscreenAllowed
 styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFallbackQuery fontProviderFetchStrategy fontProviderFetchTimeout fontProviderPackage fontProviderQuery fontProviderSystemFontFamily
 styleable FontFamilyFont android_font android_fontWeight android_fontStyle android_ttcIndex android_fontVariationSettings font fontStyle fontVariationSettings fontWeight ttcIndex
@@ -471,6 +485,7 @@ styleable FontFamilyProviderFallback fontProviderQuery fontProviderSystemFontFam
 styleable GradientColor android_startColor android_endColor android_type android_centerX android_centerY android_gradientRadius android_tileMode android_centerColor android_startX android_startY android_endX android_endY
 styleable GradientColorItem android_color android_offset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
+styleable MapAttrs ambientEnabled backgroundColor cameraBearing cameraMaxZoomPreference cameraMinZoomPreference cameraTargetLat cameraTargetLng cameraTilt cameraZoom latLngBoundsNorthEastLatitude latLngBoundsNorthEastLongitude latLngBoundsSouthWestLatitude latLngBoundsSouthWestLongitude liteMode mapColorScheme mapId mapType uiCompass uiMapToolbar uiRotateGestures uiScrollGestures uiScrollGesturesDuringRotateOrZoom uiTiltGestures uiZoomControls uiZoomGestures useViewLifecycle zOrderOnTop
 styleable SignInButton buttonSize colorScheme scopeUris
 styleable SplitPairFilter primaryActivityName secondaryActivityAction secondaryActivityName
 styleable SplitPairRule animationBackgroundColor clearTop finishPrimaryWithSecondary finishSecondaryWithPrimary splitChangeAnimation splitCloseAnimation splitLayoutDirection splitMaxAspectRatioInLandscape splitMaxAspectRatioInPortrait splitMinHeightDp splitMinSmallestWidthDp splitMinWidthDp splitOpenAnimation splitRatio tag

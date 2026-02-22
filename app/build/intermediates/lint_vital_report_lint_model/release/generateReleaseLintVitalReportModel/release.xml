@@ -22,12 +22,17 @@
   </testSourceProviders>
   <testFixturesSourceProviders>
   </testFixturesSourceProviders>
+  <manifestPlaceholders>
+    <placeholder
+        name="MAPS_API_KEY"
+        value="AIzaSyBGGjL0udDhD4VCGA5gvq24KaPYKANeosw" />
+  </manifestPlaceholders>
   <artifact
       classOutputs="build\intermediates\javac\release\compileReleaseJavaWithJavac\classes;build\tmp\kotlin-classes\release;build\kotlinToolingMetadata;build\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\processReleaseResources\R.jar"
       type="MAIN"
       applicationId="com.amc.celendinapp"
       generatedSourceFolders="build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="C:\Users\antonio\.gradle\caches\8.13\transforms\260b5cdb3f78eb8b82e36f002c64418c\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="C:\Users\antonio\.gradle\caches\8.13\transforms\5861ceed7545d57f7a44a143ca2190b6\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>
