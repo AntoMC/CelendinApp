@@ -1642,20 +1642,14 @@ androidx.compose.animation.AnimatedContentTransitionScopeImpl$slideOutOfContaine
 androidx.compose.animation.AnimatedContentTransitionScopeImpl$slideOutOfContainer$3
 androidx.compose.animation.AnimatedContentTransitionScopeImpl$slideOutOfContainer$4
 androidx.compose.animation.AnimatedContentTransitionScopeImpl
-androidx.compose.animation.AnimatedEnterExitMeasurePolicy$measure$1
-androidx.compose.animation.AnimatedEnterExitMeasurePolicy
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$2$1$1$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$2$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$4
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1$2
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$1$1
+androidx.compose.animation.AnimatedEnterExitMeasurePolicy:
+    public final boolean getHasLookaheadOccurred()
+    public final androidx.compose.animation.AnimatedVisibilityScopeImpl getScope()
+    public final void setHasLookaheadOccurred(boolean)
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$10
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$11$1
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$12
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$13
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$2
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$3$1
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$4
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$5$1
@@ -1663,16 +1657,24 @@ androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$6
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$7$1
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$8
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$9$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$1$1$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$1$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$2$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$3
-androidx.compose.animation.AnimatedVisibilityKt
+androidx.compose.animation.AnimatedVisibilityKt:
+    public static final void AnimatedVisibility(androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
+    public static final void AnimatedVisibility(androidx.compose.animation.core.Transition,kotlin.jvm.functions.Function1,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
+    public static final void AnimatedVisibility(androidx.compose.foundation.layout.ColumnScope,androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
+    public static final void AnimatedVisibility(androidx.compose.foundation.layout.ColumnScope,boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
+    public static final void AnimatedVisibility(androidx.compose.foundation.layout.RowScope,androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
+    public static final void AnimatedVisibility(androidx.compose.foundation.layout.RowScope,boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
 androidx.compose.animation.AnimatedVisibilityScope$DefaultImpls
 androidx.compose.animation.AnimatedVisibilityScope$animateEnterExit$$inlined$debugInspectorInfo$1
 androidx.compose.animation.AnimatedVisibilityScope$animateEnterExit$2
-androidx.compose.animation.AnimatedVisibilityScope
-androidx.compose.animation.AnimatedVisibilityScopeImpl
+androidx.compose.animation.AnimatedVisibilityScope:
+    public static synthetic androidx.compose.ui.Modifier access$animateEnterExit$jd(androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String)
+    public androidx.compose.ui.Modifier animateEnterExit(androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String)
+    public static synthetic androidx.compose.ui.Modifier animateEnterExit$default(androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,int,java.lang.Object)
+    public abstract androidx.compose.animation.core.Transition getTransition()
+androidx.compose.animation.AnimatedVisibilityScopeImpl:
+    public androidx.compose.animation.core.Transition getTransition()
+    public void setTransition(androidx.compose.animation.core.Transition)
 androidx.compose.animation.AnimationModifierKt:
     public static final androidx.compose.ui.Modifier animateContentSize(androidx.compose.ui.Modifier,androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,kotlin.jvm.functions.Function2)
     public static synthetic androidx.compose.ui.Modifier animateContentSize$default(androidx.compose.ui.Modifier,androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,kotlin.jvm.functions.Function2,int,java.lang.Object)
@@ -1698,10 +1700,6 @@ androidx.compose.animation.ChangeSize:
     public final boolean component4()
     public final androidx.compose.animation.ChangeSize copy(androidx.compose.ui.Alignment,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,boolean)
     public static synthetic androidx.compose.animation.ChangeSize copy$default(androidx.compose.animation.ChangeSize,androidx.compose.ui.Alignment,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,boolean,int,java.lang.Object)
-    public final androidx.compose.ui.Alignment getAlignment()
-    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
-    public final boolean getClip()
-    public final kotlin.jvm.functions.Function1 getSize()
 androidx.compose.animation.ContentScaleTransitionEffect$Key
 androidx.compose.animation.ContentScaleTransitionEffect
 androidx.compose.animation.ContentTransform
@@ -1716,24 +1714,27 @@ androidx.compose.animation.CrossfadeKt$Crossfade$5$1$invoke$$inlined$animateFloa
 androidx.compose.animation.CrossfadeKt$Crossfade$5$1
 androidx.compose.animation.CrossfadeKt$Crossfade$7
 androidx.compose.animation.CrossfadeKt
-androidx.compose.animation.EnterExitState
-androidx.compose.animation.EnterExitTransitionElement
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$alpha$1
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$alpha$2$WhenMappings
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$alpha$2
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$block$1
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$scale$1
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$scale$2$WhenMappings
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$scale$2
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$transformOrigin$1
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$transformOrigin$2$WhenMappings
-androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$transformOrigin$2
-androidx.compose.animation.EnterExitTransitionKt$createModifier$1$1
-androidx.compose.animation.EnterExitTransitionKt$createModifier$2$1
-androidx.compose.animation.EnterExitTransitionKt$expandIn$1
+androidx.compose.animation.EnterExitState:
+    public static kotlin.enums.EnumEntries getEntries()
+androidx.compose.animation.EnterExitTransitionElement:
+    public final androidx.compose.animation.EnterTransition getEnter()
+    public final androidx.compose.animation.ExitTransition getExit()
+    public final androidx.compose.animation.GraphicsLayerBlockForEnterExit getGraphicsLayerBlock()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getOffsetAnimation()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getSizeAnimation()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getSlideAnimation()
+    public final androidx.compose.animation.core.Transition getTransition()
+    public void inspectableProperties(androidx.compose.ui.platform.InspectorInfo)
+    public final kotlin.jvm.functions.Function0 isEnabled()
+    public final void setEnabled(kotlin.jvm.functions.Function0)
+    public final void setEnter(androidx.compose.animation.EnterTransition)
+    public final void setExit(androidx.compose.animation.ExitTransition)
+    public final void setGraphicsLayerBlock(androidx.compose.animation.GraphicsLayerBlockForEnterExit)
+    public final void setOffsetAnimation(androidx.compose.animation.core.Transition$DeferredAnimation)
+    public final void setSizeAnimation(androidx.compose.animation.core.Transition$DeferredAnimation)
+    public final void setSlideAnimation(androidx.compose.animation.core.Transition$DeferredAnimation)
 androidx.compose.animation.EnterExitTransitionKt$expandVertically$1
 androidx.compose.animation.EnterExitTransitionKt$expandVertically$2
-androidx.compose.animation.EnterExitTransitionKt$shrinkOut$1
 androidx.compose.animation.EnterExitTransitionKt$shrinkVertically$1
 androidx.compose.animation.EnterExitTransitionKt$shrinkVertically$2
 androidx.compose.animation.EnterExitTransitionKt$slideInHorizontally$1
@@ -1745,14 +1746,6 @@ androidx.compose.animation.EnterExitTransitionKt$slideOutHorizontally$2
 androidx.compose.animation.EnterExitTransitionKt$slideOutVertically$1
 androidx.compose.animation.EnterExitTransitionKt$slideOutVertically$2
 androidx.compose.animation.EnterExitTransitionKt:
-    public static final synthetic androidx.compose.animation.core.SpringSpec access$getDefaultAlphaAndScaleSpring$p()
-    public static final synthetic androidx.compose.animation.core.SpringSpec access$getDefaultColorAnimationSpec$p()
-    public static final synthetic androidx.compose.animation.core.SpringSpec access$getDefaultOffsetAnimationSpec$p()
-    public static final synthetic androidx.compose.animation.core.SpringSpec access$getDefaultSizeAnimationSpec$p()
-    private static final androidx.compose.animation.GraphicsLayerBlockForEnterExit createGraphicsLayerBlock(androidx.compose.animation.core.Transition,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,androidx.compose.runtime.Composer,int)
-    private static final kotlin.jvm.functions.Function1 createGraphicsLayerBlock$lambda$2$0(androidx.compose.animation.core.Transition$DeferredAnimation,androidx.compose.animation.core.Transition$DeferredAnimation,androidx.compose.animation.core.Transition,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,androidx.compose.animation.core.Transition$DeferredAnimation)
-    public static final androidx.compose.ui.Modifier createModifier(androidx.compose.animation.core.Transition,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.jvm.functions.Function0,java.lang.String,androidx.compose.runtime.Composer,int,int)
-    public static synthetic androidx.compose.animation.EnterTransition expandIn$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.EnterTransition expandVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.EnterTransition expandVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.TransitionEffect get(androidx.compose.animation.EnterTransition,androidx.compose.animation.TransitionEffectKey)
@@ -1761,7 +1754,6 @@ androidx.compose.animation.EnterExitTransitionKt:
     public static synthetic androidx.compose.animation.EnterTransition scaleIn-L8ZKh-E$default(androidx.compose.animation.core.FiniteAnimationSpec,float,long,int,java.lang.Object)
     public static final androidx.compose.animation.ExitTransition scaleOut-L8ZKh-E(androidx.compose.animation.core.FiniteAnimationSpec,float,long)
     public static synthetic androidx.compose.animation.ExitTransition scaleOut-L8ZKh-E$default(androidx.compose.animation.core.FiniteAnimationSpec,float,long,int,java.lang.Object)
-    public static synthetic androidx.compose.animation.ExitTransition shrinkOut$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.ExitTransition shrinkVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition shrinkVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.EnterTransition slideIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
@@ -1777,41 +1769,30 @@ androidx.compose.animation.EnterExitTransitionKt:
     public static final androidx.compose.animation.ExitTransition slideOutVertically(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition slideOutVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
     private static final androidx.compose.ui.Alignment toAlignment(androidx.compose.ui.Alignment$Vertical)
-    public static final androidx.compose.animation.EnterTransition trackActiveEnter(androidx.compose.animation.core.Transition,androidx.compose.animation.EnterTransition,androidx.compose.runtime.Composer,int)
-    private static final androidx.compose.animation.EnterTransition trackActiveEnter$lambda$1(androidx.compose.runtime.MutableState)
-    private static final void trackActiveEnter$lambda$2(androidx.compose.runtime.MutableState,androidx.compose.animation.EnterTransition)
-    public static final androidx.compose.animation.ExitTransition trackActiveExit(androidx.compose.animation.core.Transition,androidx.compose.animation.ExitTransition,androidx.compose.runtime.Composer,int)
-    private static final androidx.compose.animation.ExitTransition trackActiveExit$lambda$1(androidx.compose.runtime.MutableState)
-    private static final void trackActiveExit$lambda$2(androidx.compose.runtime.MutableState,androidx.compose.animation.ExitTransition)
     public static final androidx.compose.animation.EnterTransition unveilIn-bw27NRU(androidx.compose.animation.core.FiniteAnimationSpec,long,boolean)
     public static synthetic androidx.compose.animation.EnterTransition unveilIn-bw27NRU$default(androidx.compose.animation.core.FiniteAnimationSpec,long,boolean,int,java.lang.Object)
     public static final androidx.compose.animation.ExitTransition veilOut-bw27NRU(androidx.compose.animation.core.FiniteAnimationSpec,long,boolean)
     public static synthetic androidx.compose.animation.ExitTransition veilOut-bw27NRU$default(androidx.compose.animation.core.FiniteAnimationSpec,long,boolean,int,java.lang.Object)
     public static final androidx.compose.animation.EnterTransition withEffect(androidx.compose.animation.EnterTransition,androidx.compose.animation.TransitionEffect)
     public static final androidx.compose.animation.ExitTransition withEffect(androidx.compose.animation.ExitTransition,androidx.compose.animation.TransitionEffect)
-androidx.compose.animation.EnterExitTransitionModifierNode$WhenMappings
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$1
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$2
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$3$1
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$animSize$1
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$offsetDelta$1
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$offsetDelta$2
-androidx.compose.animation.EnterExitTransitionModifierNode$measure$slideOffset$1
-androidx.compose.animation.EnterExitTransitionModifierNode$sizeTransitionSpec$1
-androidx.compose.animation.EnterExitTransitionModifierNode$slideSpec$1
-androidx.compose.animation.EnterExitTransitionModifierNode
-androidx.compose.animation.EnterTransition$Companion:
-    public final androidx.compose.animation.EnterTransition getNone()
+androidx.compose.animation.EnterExitTransitionModifierNode:
+    public final androidx.compose.ui.Alignment getCurrentAlignment()
+    public final androidx.compose.animation.GraphicsLayerBlockForEnterExit getGraphicsLayerBlock()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getOffsetAnimation()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getSizeAnimation()
+    public final kotlin.jvm.functions.Function1 getSizeTransitionSpec()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getSlideAnimation()
+    public final kotlin.jvm.functions.Function1 getSlideSpec()
+    public final androidx.compose.animation.core.Transition getTransition()
+    public final kotlin.jvm.functions.Function0 isEnabled()
+    public final void setCurrentAlignment(androidx.compose.ui.Alignment)
 androidx.compose.animation.EnterTransition:
     public static final int $stable
-    public static final synthetic androidx.compose.animation.EnterTransition access$getNone$cp()
 androidx.compose.animation.ExitTransition$Companion:
     public final androidx.compose.animation.ExitTransition getKeepUntilTransitionsFinished$animation()
-    public final androidx.compose.animation.ExitTransition getNone()
 androidx.compose.animation.ExitTransition:
     public static final int $stable
     public static final synthetic androidx.compose.animation.ExitTransition access$getKeepUntilTransitionsFinished$cp()
-    public static final synthetic androidx.compose.animation.ExitTransition access$getNone$cp()
 androidx.compose.animation.ExperimentalAnimationApi
 androidx.compose.animation.ExperimentalSharedTransitionApi
 androidx.compose.animation.Fade:
@@ -1820,8 +1801,6 @@ androidx.compose.animation.Fade:
     public final androidx.compose.animation.core.FiniteAnimationSpec component2()
     public final androidx.compose.animation.Fade copy(float,androidx.compose.animation.core.FiniteAnimationSpec)
     public static synthetic androidx.compose.animation.Fade copy$default(androidx.compose.animation.Fade,float,androidx.compose.animation.core.FiniteAnimationSpec,int,java.lang.Object)
-    public final float getAlpha()
-    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
 androidx.compose.animation.FlingCalculator$FlingInfo:
     public static final int $stable
     public final float component1()
@@ -1838,11 +1817,9 @@ androidx.compose.animation.FlingCalculator:
 androidx.compose.animation.FlingCalculatorKt:
     private static final float GravityEarth
     private static final float InchesPerMeter
-androidx.compose.animation.GraphicsLayerBlockForEnterExit
 androidx.compose.animation.LayerRenderer
 androidx.compose.animation.MatchIsOrHasBeenConfigured
 androidx.compose.animation.NoMatchFound
-androidx.compose.animation.OnLookaheadMeasured
 androidx.compose.animation.R
 androidx.compose.animation.RemeasureImpl
 androidx.compose.animation.RenderInTransitionOverlayNode$LayerWithRenderer
@@ -1864,9 +1841,6 @@ androidx.compose.animation.Scale:
     public final androidx.compose.animation.Scale copy-bnNdC4k(float,long,androidx.compose.animation.core.FiniteAnimationSpec)
     public static synthetic androidx.compose.animation.Scale copy-bnNdC4k$default(androidx.compose.animation.Scale,float,long,androidx.compose.animation.core.FiniteAnimationSpec,int,java.lang.Object)
     public boolean equals(java.lang.Object)
-    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
-    public final float getScale()
-    public final long getTransformOrigin-SzJe1aQ()
 androidx.compose.animation.ScaleToBoundsImpl
 androidx.compose.animation.SharedBoundsNode$approachPlace$1
 androidx.compose.animation.SharedBoundsNode$draw$1
@@ -1965,8 +1939,6 @@ androidx.compose.animation.Slide:
     public final androidx.compose.animation.Slide copy(kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec)
     public static synthetic androidx.compose.animation.Slide copy$default(androidx.compose.animation.Slide,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,int,java.lang.Object)
     public boolean equals(java.lang.Object)
-    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
-    public final kotlin.jvm.functions.Function1 getSlideOffset()
 androidx.compose.animation.SplineBasedDecayKt:
     private static final float EndTension
     private static final float Inflection
@@ -2012,16 +1984,22 @@ androidx.compose.animation.Veil:
     public final androidx.compose.animation.Veil copy-RFnl5yQ(long,long,androidx.compose.animation.core.FiniteAnimationSpec,boolean)
     public static synthetic androidx.compose.animation.Veil copy-RFnl5yQ$default(androidx.compose.animation.Veil,long,long,androidx.compose.animation.core.FiniteAnimationSpec,boolean,int,java.lang.Object)
     public boolean equals(java.lang.Object)
-    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
-    public final long getInitialColor-0d7_KjU()
-    public final boolean getMatchParentSize()
-    public final long getTargetColor-0d7_KjU()
     public java.lang.String toString()
-androidx.compose.animation.VeilModifierElement
-androidx.compose.animation.VeilModifierNode$draw$veilColor$1
-androidx.compose.animation.VeilModifierNode$draw$veilColor$2$WhenMappings
-androidx.compose.animation.VeilModifierNode$draw$veilColor$2
-androidx.compose.animation.VeilModifierNode
+androidx.compose.animation.VeilModifierElement:
+    public final androidx.compose.animation.core.Transition component1()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation component2()
+    public final androidx.compose.animation.EnterTransition component3()
+    public final androidx.compose.animation.ExitTransition component4()
+    public final androidx.compose.animation.VeilModifierElement copy(androidx.compose.animation.core.Transition,androidx.compose.animation.core.Transition$DeferredAnimation,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition)
+    public static synthetic androidx.compose.animation.VeilModifierElement copy$default(androidx.compose.animation.VeilModifierElement,androidx.compose.animation.core.Transition,androidx.compose.animation.core.Transition$DeferredAnimation,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,int,java.lang.Object)
+    public final androidx.compose.animation.EnterTransition getEnter()
+    public final androidx.compose.animation.ExitTransition getExit()
+    public final androidx.compose.animation.core.Transition getTransition()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getVeilAnimation()
+    public void inspectableProperties(androidx.compose.ui.platform.InspectorInfo)
+androidx.compose.animation.VeilModifierNode:
+    public final androidx.compose.animation.core.Transition getTransition()
+    public final androidx.compose.animation.core.Transition$DeferredAnimation getVeilAnimation()
 androidx.compose.animation.core.ActualJvm_jvmKt
 androidx.compose.animation.core.Animatable:
     private java.lang.Object lowerBound
@@ -2416,13 +2394,13 @@ androidx.compose.animation.core.TargetBasedAnimation:
     public final java.lang.Object getMutableTargetValue$animation_core()
     public final void setMutableInitialValue$animation_core(java.lang.Object)
     public final void setMutableTargetValue$animation_core(java.lang.Object)
-androidx.compose.animation.core.Transition$DeferredAnimation$DeferredAnimationData
-androidx.compose.animation.core.Transition$DeferredAnimation
+androidx.compose.animation.core.Transition$DeferredAnimation:
+    public final java.lang.String getLabel()
+    public final androidx.compose.animation.core.TwoWayConverter getTypeConverter()
 androidx.compose.animation.core.Transition$Segment$DefaultImpls
 androidx.compose.animation.core.Transition$Segment:
     public static synthetic boolean access$isTransitioningTo$jd(androidx.compose.animation.core.Transition$Segment,java.lang.Object,java.lang.Object)
 androidx.compose.animation.core.Transition$TransitionAnimationState:
-    public final androidx.compose.animation.core.SeekableTransitionState$SeekingAnimationState getInitialValueState$animation_core()
     public final java.lang.String getLabel()
     public final androidx.compose.animation.core.TwoWayConverter getTypeConverter()
     public final void resetAnimationValue$animation_core(float)
@@ -2435,21 +2413,12 @@ androidx.compose.animation.core.Transition:
     public synthetic void <init>(androidx.compose.animation.core.MutableTransitionState,java.lang.String,int,kotlin.jvm.internal.DefaultConstructorMarker)
     public synthetic void <init>(androidx.compose.animation.core.TransitionState,androidx.compose.animation.core.Transition,java.lang.String,int,kotlin.jvm.internal.DefaultConstructorMarker)
     public synthetic void <init>(androidx.compose.animation.core.TransitionState,java.lang.String,int,kotlin.jvm.internal.DefaultConstructorMarker)
-    public void <init>(java.lang.Object,java.lang.String)
-    public final boolean addTransition$animation_core(androidx.compose.animation.core.Transition)
-    public final boolean getHasInitialValueAnimations()
     public static synthetic void getHasInitialValueAnimations$annotations()
-    public final java.lang.String getLabel()
-    public final long getLastSeekedTimeNanos$animation_core()
     public final androidx.compose.animation.core.Transition getParentTransition()
     public final java.util.List getTransitions()
-    public final void removeAnimation$animation_core(androidx.compose.animation.core.Transition$DeferredAnimation)
-    public final boolean removeTransition$animation_core(androidx.compose.animation.core.Transition)
     public final void resetAnimationFraction$animation_core(float)
-    public final void seek(java.lang.Object,java.lang.Object,long)
     public final void setInitialAnimations$animation_core(androidx.compose.animation.core.SeekableTransitionState$SeekingAnimationState)
     public final void setLastSeekedTimeNanos$animation_core(long)
-    public final void setSeeking$animation_core(boolean)
     public final void updateInitialValues$animation_core()
 androidx.compose.animation.core.TransitionKt$animateDp$1
 androidx.compose.animation.core.TransitionKt$animateFloat$1
@@ -2462,9 +2431,6 @@ androidx.compose.animation.core.TransitionKt$animateSize$1
 androidx.compose.animation.core.TransitionKt$animateValue$1
 androidx.compose.animation.core.TransitionKt$animateValue$animationSpec$1$1
 androidx.compose.animation.core.TransitionKt$animateValue$targetValue$1$1
-androidx.compose.animation.core.TransitionKt$createChildTransitionInternal$lambda$1$0$$inlined$onDispose$1
-androidx.compose.animation.core.TransitionKt$createDeferredAnimation$lambda$1$0$$inlined$onDispose$1
-androidx.compose.animation.core.TransitionKt$updateTransition$lambda$1$0$$inlined$onDispose$1
 androidx.compose.animation.core.TransitionKt:
     public static final int AnimationDebugDurationScale
     private static final float NoReset
@@ -2482,12 +2448,6 @@ androidx.compose.animation.core.TransitionKt:
     public static final androidx.compose.runtime.State animateSize(androidx.compose.animation.core.Transition,kotlin.jvm.functions.Function3,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
     public static final androidx.compose.runtime.State animateValue(androidx.compose.animation.core.Transition,androidx.compose.animation.core.TwoWayConverter,kotlin.jvm.functions.Function3,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
     public static final androidx.compose.animation.core.Transition createChildTransition(androidx.compose.animation.core.Transition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
-    public static final androidx.compose.animation.core.Transition createChildTransitionInternal(androidx.compose.animation.core.Transition,java.lang.Object,java.lang.Object,java.lang.String,androidx.compose.runtime.Composer,int)
-    private static final androidx.compose.runtime.DisposableEffectResult createChildTransitionInternal$lambda$1$0(androidx.compose.animation.core.Transition,androidx.compose.animation.core.Transition,androidx.compose.runtime.DisposableEffectScope)
-    public static final androidx.compose.animation.core.Transition$DeferredAnimation createDeferredAnimation(androidx.compose.animation.core.Transition,androidx.compose.animation.core.TwoWayConverter,java.lang.String,androidx.compose.runtime.Composer,int,int)
-    private static final androidx.compose.runtime.DisposableEffectResult createDeferredAnimation$lambda$1$0(androidx.compose.animation.core.Transition,androidx.compose.animation.core.Transition$DeferredAnimation,androidx.compose.runtime.DisposableEffectScope)
-    public static final androidx.compose.animation.core.Transition updateTransition(java.lang.Object,java.lang.String,androidx.compose.runtime.Composer,int,int)
-    private static final androidx.compose.runtime.DisposableEffectResult updateTransition$lambda$1$0(androidx.compose.animation.core.Transition,androidx.compose.runtime.DisposableEffectScope)
 androidx.compose.animation.core.TransitionState:
     public static final int $stable
     public abstract void setTargetState$animation_core(java.lang.Object)
@@ -8821,7 +8781,6 @@ androidx.compose.runtime.Composer:
     public abstract void disableReusing()
     public abstract void disableSourceInformation()
     public abstract void enableReusing()
-    public abstract void endMovableGroup()
     public abstract void endToMarker(int)
     public static synthetic void getApplier$annotations()
     public static synthetic void getApplyCoroutineContext$annotations()
@@ -8841,7 +8800,6 @@ androidx.compose.runtime.Composer:
     public abstract java.lang.Object joinKey(java.lang.Object,java.lang.Object)
     public abstract androidx.compose.runtime.CancellationHandle scheduleFrameEndCallback(kotlin.jvm.functions.Function0)
     public abstract void skipCurrentGroup()
-    public abstract void startMovableGroup(int,java.lang.Object)
 androidx.compose.runtime.ComposerImpl$CompositionContextImpl:
     public final java.util.Set getInspectionTables()
     public kotlin.coroutines.CoroutineContext getRecomposeCoroutineContext$runtime()
@@ -9218,9 +9176,13 @@ androidx.compose.runtime.PrioritySet:
     public final synthetic androidx.collection.MutableIntList unbox-impl()
     public static final void validateHeap-impl(androidx.collection.MutableIntList)
 androidx.compose.runtime.ProduceFrameSignal
-androidx.compose.runtime.ProduceStateScope
+androidx.compose.runtime.ProduceStateScope:
+    public abstract java.lang.Object awaitDispose(kotlin.jvm.functions.Function0,kotlin.coroutines.Continuation)
 androidx.compose.runtime.ProduceStateScopeImpl$awaitDispose$1
-androidx.compose.runtime.ProduceStateScopeImpl
+androidx.compose.runtime.ProduceStateScopeImpl:
+    public java.lang.Object awaitDispose(kotlin.jvm.functions.Function0,kotlin.coroutines.Continuation)
+    public java.lang.Object component1()
+    public kotlin.jvm.functions.Function1 component2()
 androidx.compose.runtime.ProvidableCompositionLocal:
     public static final int $stable
     public final androidx.compose.runtime.ProvidedValue providesComputed(kotlin.jvm.functions.Function1)
@@ -9546,7 +9508,6 @@ androidx.compose.runtime.SnapshotStateKt:
     public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
     public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
     public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
-    public static final androidx.compose.runtime.State produceState(java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
     public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object[],kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
     public static final void setValue(androidx.compose.runtime.MutableState,java.lang.Object,kotlin.reflect.KProperty,java.lang.Object)
     public static final androidx.compose.runtime.snapshots.SnapshotStateList toMutableStateList(java.util.Collection)
@@ -9555,12 +9516,15 @@ androidx.compose.runtime.SnapshotStateKt__DerivedStateKt:
     private static final java.lang.Object notifyObservers$SnapshotStateKt__DerivedStateKt(androidx.compose.runtime.DerivedState,kotlin.jvm.functions.Function0)
     public static final void observeDerivedStateRecalculations(androidx.compose.runtime.DerivedStateObserver,kotlin.jvm.functions.Function0)
     private static final java.lang.Object withCalculationNestedLevel$SnapshotStateKt__DerivedStateKt(kotlin.jvm.functions.Function1)
-androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$1$1
 androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$2$1
 androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1
 androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$4$1
 androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$5$1
-androidx.compose.runtime.SnapshotStateKt__ProduceStateKt
+androidx.compose.runtime.SnapshotStateKt__ProduceStateKt:
+    public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
+    public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
+    public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
+    public static final androidx.compose.runtime.State produceState(java.lang.Object,java.lang.Object[],kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int)
 androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1$1
 androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1$2$1
 androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1$2
@@ -14088,7 +14052,6 @@ androidx.compose.ui.layout.LayoutCoordinates:
     public abstract java.util.Set getProvidedAlignmentLines()
 androidx.compose.ui.layout.LayoutCoordinatesKt:
     public static final synthetic androidx.compose.ui.geometry.Rect boundsInWindow(androidx.compose.ui.layout.LayoutCoordinates)
-    public static final long positionInParent(androidx.compose.ui.layout.LayoutCoordinates)
     public static final long positionInWindow(androidx.compose.ui.layout.LayoutCoordinates)
 androidx.compose.ui.layout.LayoutElement:
     public final kotlin.jvm.functions.Function3 getMeasure()
@@ -33654,12 +33617,27 @@ androidx.activity.compose.ManagedActivityResultLauncher:
     public static final int $stable
 androidx.arch.core.internal.SafeIterableMap:
     public java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)
+androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$2$1:
+    final synthetic androidx.compose.animation.OnLookaheadMeasured $onLookaheadMeasured
+androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$4:
+    final synthetic androidx.compose.animation.OnLookaheadMeasured $onLookaheadMeasured
+androidx.compose.animation.AnimatedVisibilityScopeImpl:
+    public static final int $stable
+androidx.compose.animation.EnterExitTransitionKt:
+    public static final synthetic androidx.compose.animation.core.SpringSpec access$getDefaultColorAnimationSpec$p()
+androidx.compose.animation.OnLookaheadMeasured:
+    public abstract void invoke-ozmzZPI(long)
 androidx.compose.animation.Scale:
+    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
+    public final float getScale()
+    public final long getTransformOrigin-SzJe1aQ()
     public int hashCode()
     public java.lang.String toString()
 androidx.compose.animation.SizeAnimationModifierNode$AnimData:
     public static final int $stable
 androidx.compose.animation.Slide:
+    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
+    public final kotlin.jvm.functions.Function1 getSlideOffset()
     public int hashCode()
     public java.lang.String toString()
 androidx.compose.animation.TransitionData:
@@ -33668,7 +33646,16 @@ androidx.compose.animation.TransitionData:
     private final androidx.compose.animation.Veil veil
     public void <init>()
 androidx.compose.animation.Veil:
+    public final androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
+    public final long getInitialColor-0d7_KjU()
+    public final boolean getMatchParentSize()
+    public final long getTargetColor-0d7_KjU()
     public int hashCode()
+androidx.compose.animation.VeilModifierElement
+androidx.compose.animation.VeilModifierNode$draw$veilColor$1
+androidx.compose.animation.VeilModifierNode$draw$veilColor$2$WhenMappings
+androidx.compose.animation.VeilModifierNode$draw$veilColor$2
+androidx.compose.animation.VeilModifierNode
 androidx.compose.animation.core.Animatable:
     public static final int $stable
 androidx.compose.animation.core.AnimationScope:
@@ -33697,7 +33684,12 @@ androidx.compose.animation.core.KeyframesSpecBaseConfig:
     public static final int $stable
 androidx.compose.animation.core.MutationInterruptedException:
     public static final int $stable
-androidx.compose.animation.core.SeekableTransitionState$SeekingAnimationState
+androidx.compose.animation.core.SeekableTransitionState$SeekingAnimationState:
+    public final androidx.compose.animation.core.VectorizedAnimationSpec getAnimationSpec()
+    public final long getProgressNanos()
+    public final androidx.compose.animation.core.AnimationVector1D getStart()
+    public final void setAnimationSpecDuration(long)
+    public final void setDurationNanos(long)
 androidx.compose.animation.core.SeekableTransitionState:
     private androidx.compose.animation.core.SeekableTransitionState$SeekingAnimationState currentAnimation
     private final androidx.collection.MutableObjectList initialValueAnimations
@@ -34481,6 +34473,8 @@ androidx.compose.ui.layout.DefaultIntrinsicMeasurable:
     public static final int $stable
 androidx.compose.ui.layout.InsetsListener:
     public static final int $stable
+androidx.compose.ui.layout.LayoutCoordinatesKt:
+    public static final long positionInParent(androidx.compose.ui.layout.LayoutCoordinates)
 androidx.compose.ui.layout.LayoutIdModifier:
     public static final int $stable
 androidx.compose.ui.layout.LayoutModifierImpl:

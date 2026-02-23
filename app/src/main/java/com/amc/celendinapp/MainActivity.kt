@@ -509,29 +509,29 @@ fun CelendinScreen(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { 
+                    title = {
                         HeaderTitle(
-                            distrito = distritoActual, 
-                            found = filtrados.size, 
-                            total = clientes.size, 
-                            searching = buscadorActivado, 
+                            distrito = distritoActual,
+                            found = filtrados.size,
+                            total = clientes.size,
+                            searching = buscadorActivado,
                             textoBusqueda = textoBusqueda,
                             localidadSeleccionada = localidadSeleccionada,
                             listaLocalidades = remember(clientes) { listOf("Todos") + clientes.map { it.localidad ?: "Sin Localidad" }.distinct().sorted() },
                             onSearch = onSearchChange,
                             onLocalidadChange = { localidadSeleccionada = it },
-                            onCloseSearch = { 
-                                onToggleBuscador(false) 
+                            onCloseSearch = {
+                                onToggleBuscador(false)
                                 localidadSeleccionada = "Todos"
                                 miUbicacion = null
                             }
-                        ) 
+                        )
                     },
                     navigationIcon = { IconButton(onClick = onAbrirDrawer) { Icon(Icons.Default.Menu, null, tint = Color.White) } },
                     actions = {
                         if (!buscadorActivado) {
-                            IconButton(onClick = { onToggleBuscador(true) }) { 
-                                Icon(Icons.Default.Search, null, tint = Color.White) 
+                            IconButton(onClick = { onToggleBuscador(true) }) {
+                                Icon(Icons.Default.Search, null, tint = Color.White)
                             }
                         }
 
@@ -598,10 +598,10 @@ fun CelendinScreen(
                     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(8.dp)) {
                         items(filtrados) { cliente ->
                             TarjetaCliente(
-                                cliente = cliente, 
-                                yaVisitado = visitadosIds.contains(cliente.codigoSuministro ?: ""), 
-                                miUbicacion = miUbicacion, 
-                                onVerMapa = { 
+                                cliente = cliente,
+                                yaVisitado = visitadosIds.contains(cliente.codigoSuministro ?: ""),
+                                miUbicacion = miUbicacion,
+                                onVerMapa = {
                                     onSeleccionarCliente(cliente)
                                     onToggleMapa(true)
                                     iniciarUbicacion()
@@ -623,8 +623,8 @@ fun CelendinScreen(
         if (mapaInternoActivado) {
             Box(Modifier.fillMaxSize()) {
                 MapaGoogle(
-                    miUbicacion = miUbicacion, 
-                    clientes = filtrados, 
+                    miUbicacion = miUbicacion,
+                    clientes = filtrados,
                     visitadosIds = visitadosIds,
                     clienteSeleccionado = clienteSeleccionado,
                     onToggleVisita = { id ->
