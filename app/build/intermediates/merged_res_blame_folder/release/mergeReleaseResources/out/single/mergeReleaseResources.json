@@ -320,6 +320,10 @@
         "source": "com.amc.celendinapp-core-1.17.0-3:/drawable/notification_bg.xml"
     },
     {
+        "merged": "com.amc.celendinapp-release-46:/drawable_ic_capa.xml.flat",
+        "source": "com.amc.celendinapp-main-47:/drawable/ic_capa.xml"
+    },
+    {
         "merged": "com.amc.celendinapp-release-46:/drawable_common_google_signin_btn_icon_dark_focused.xml.flat",
         "source": "com.amc.celendinapp-play-services-base-18.5.0-35:/drawable/common_google_signin_btn_icon_dark_focused.xml"
     },
@@ -414,6 +418,10 @@
     {
         "merged": "com.amc.celendinapp-release-46:/drawable-hdpi-v4_googleg_disabled_color_18.png.flat",
         "source": "com.amc.celendinapp-play-services-base-18.5.0-35:/drawable-hdpi-v4/googleg_disabled_color_18.png"
+    },
+    {
+        "merged": "com.amc.celendinapp-release-46:/xml_file_paths.xml.flat",
+        "source": "com.amc.celendinapp-main-47:/xml/file_paths.xml"
     },
     {
         "merged": "com.amc.celendinapp-release-46:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",

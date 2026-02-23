@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.amc.celendinapp-mergeDebugResources-42:/values-v30/values-v30.xml",
+            "outputFile": "com.amc.celendinapp-mergeDebugResources-43:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\antonio\\.gradle\\caches\\8.13\\transforms\\cdad1a85c1a699809b53700662b55578\\transformed\\material3\\res\\values-v30\\values-v30.xml",
+                    "source": "/home/antonio/.gradle/caches/8.13/transforms/c511ad255ebdde57accf0e28cab52591/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -11,6 +11,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- Necesario para detectar si WhatsApp está instalado en Android 11+ -->
+    <queries>
+        <package android:name="com.whatsapp" />
+        <!-- Needs to be explicitly declared on Android R+ -->
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
 
     <!-- Include required permissions for Google Maps API to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,12 +28,6 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-
-    <queries>
-
-        <!-- Needs to be explicitly declared on Android R+ -->
-        <package android:name="com.google.android.apps.maps" />
-    </queries>
 
     <permission
         android:name="com.amc.celendinapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -45,8 +49,6 @@
         android:testOnly="true"
         android:theme="@style/Theme.CelendinApp"
         android:usesCleartextTraffic="true" >
-
-        <!-- La clave se inyecta desde local.properties a través de build.gradle.kts -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBGGjL0udDhD4VCGA5gvq24KaPYKANeosw" />
@@ -61,7 +63,57 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- Filtro para JSON -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/json" />
+            </intent-filter>
+
+            <!-- Filtro para KMZ -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/vnd.google-earth.kmz" />
+            </intent-filter>
+
+            <!-- Filtro de respaldo por extensión -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.json" />
+                <data android:pathPattern=".*\\.kmz" />
+            </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.amc.celendinapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <!-- Needs to be explicitly declared on P+ -->
         <uses-library
             android:name="org.apache.http.legacy"

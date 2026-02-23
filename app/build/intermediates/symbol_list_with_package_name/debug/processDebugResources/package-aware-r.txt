@@ -162,6 +162,7 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_capa
 drawable ic_check_circle_outline
 drawable ic_delete
 drawable ic_home
@@ -421,15 +422,10 @@ string m3c_dialog
 string m3c_dropdown_menu_collapsed
 string m3c_dropdown_menu_expanded
 string m3c_dropdown_menu_toggle
-string m3c_floating_toolbar_collapse
-string m3c_floating_toolbar_expand
 string m3c_search_bar_search
 string m3c_snackbar_dismiss
-string m3c_snackbar_pane_title
 string m3c_suggestions_available
-string m3c_time_input_dialog_title
 string m3c_time_picker_am
-string m3c_time_picker_dialog_title
 string m3c_time_picker_hour
 string m3c_time_picker_hour_24h_suffix
 string m3c_time_picker_hour_selection
@@ -441,12 +437,8 @@ string m3c_time_picker_minute_suffix
 string m3c_time_picker_minute_text_field
 string m3c_time_picker_period_toggle_description
 string m3c_time_picker_pm
-string m3c_time_picker_toggle_keyboard
-string m3c_time_picker_toggle_touch
 string m3c_tooltip_long_press_label
 string m3c_tooltip_pane_description
-string m3c_wide_navigation_rail_close_rail
-string m3c_wide_navigation_rail_pane_title
 string navigation_menu
 string not_selected
 string range_end
@@ -492,5 +484,6 @@ styleable SplitPairRule animationBackgroundColor clearTop finishPrimaryWithSecon
 styleable SplitPlaceholderRule animationBackgroundColor finishPrimaryWithPlaceholder placeholderActivityName splitChangeAnimation splitCloseAnimation splitLayoutDirection splitMaxAspectRatioInLandscape splitMaxAspectRatioInPortrait splitMinHeightDp splitMinSmallestWidthDp splitMinWidthDp splitOpenAnimation splitRatio stickyPlaceholder tag
 xml backup_rules
 xml data_extraction_rules
+xml file_paths
 xml image_share_filepaths
 xml network_security_config

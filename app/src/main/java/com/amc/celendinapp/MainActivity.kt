@@ -2,16 +2,19 @@ package com.amc.celendinapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -37,20 +40,22 @@ import com.google.android.gms.location.Priority
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CelendinAppTheme {
-                MainAppContainer()
+                MainAppContainer(intent)
             }
         }
     }
 }
 
 @Composable
-fun MainAppContainer() {
+fun MainAppContainer(intent: Intent? = null) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -60,6 +65,15 @@ fun MainAppContainer() {
     var mostrarDialogoOpciones by remember { mutableStateOf(false) }
     var mapaInternoActivado by remember { mutableStateOf(false) }
     var clienteSeleccionadoMapa by remember { mutableStateOf<Cliente?>(null) }
+    var seAbrioConArchivoExterno by remember { mutableStateOf(false) }
+
+    val cacheEntries = remember { mutableStateListOf<CacheEntry>() }
+    var selectedEntryId by remember { mutableStateOf("") }
+    var idParaConfirmarCambio by remember { mutableStateOf<String?>(null) }
+    
+    var distritoSeleccionado by remember { mutableStateOf("Todos") }
+    var buscadorActivado by remember { mutableStateOf(false) }
+    var textoBusqueda by remember { mutableStateOf("") }
 
     val distritosCelendin = remember {
         listOf(
@@ -69,29 +83,111 @@ fun MainAppContainer() {
         ).sorted()
     }
 
+    fun cargarDatosDesdeCache() {
+        val entry = CacheManager.leerEntradaSeleccionada(context)
+        if (entry != null) {
+            listaMutable = entry.clientes
+            selectedEntryId = entry.id
+            distritoSeleccionado = "Todos"
+        }
+        cacheEntries.clear()
+        cacheEntries.addAll(CacheManager.leerTodasLasEntradas(context))
+    }
+
+    fun obtenerNombreArchivo(uri: Uri): String {
+        var result: String? = null
+        if (uri.scheme == "content") {
+            try {
+                context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))
+                    }
+                }
+            } catch (e: Exception) {
+            }
+        }
+        if (result == null) {
+            result = uri.path
+            val cut = result?.lastIndexOf('/') ?: -1
+            if (cut != -1) {
+                result = result?.substring(cut + 1)
+            }
+        }
+        return result?.substringBeforeLast(".") ?: "Archivo"
+    }
+
+    fun procesarUriExterna(uri: Uri) {
+        scope.launch {
+            estaCargando = true
+            mensajeCarga = "Procesando archivo...\n"
+            try {
+                val contentResolver = context.contentResolver
+                val type = contentResolver.getType(uri)
+                val inputStream = contentResolver.openInputStream(uri)
+
+                if (inputStream != null) {
+                    val clientes = if (type?.contains("kmz") == true || uri.toString().lowercase().endsWith(".kmz")) {
+                        ImportManager.procesarKmz(inputStream)
+                    } else {
+                        val jsonString = inputStream.bufferedReader().use { it.readText() }
+                        ImportManager.procesarJson(jsonString)
+                    }
+
+                    if (clientes.isNotEmpty()) {
+                        val nombreBase = obtenerNombreArchivo(uri)
+                        val distritoPrincipal = clientes.mapNotNull { it.distrito }
+                            .groupingBy { it }
+                            .eachCount()
+                            .maxByOrNull { it.value }?.key ?: "Varios"
+                        
+                        val nombreFinal = "$nombreBase ($distritoPrincipal)"
+                        
+                        CacheManager.guardarNuevaEntrada(context, nombreFinal, clientes)
+                        cargarDatosDesdeCache()
+                        seAbrioConArchivoExterno = true
+                        Toast.makeText(context, "Archivo cargado con éxito", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error al abrir archivo", Toast.LENGTH_SHORT).show()
+            } finally {
+                estaCargando = false
+            }
+        }
+    }
+
+    LaunchedEffect(intent) {
+        if (intent?.action == Intent.ACTION_VIEW) {
+            intent.data?.let { uri -> procesarUriExterna(uri) }
+        }
+    }
+
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        if (uri != null) {
-            scope.launch {
-                estaCargando = true
-                mensajeCarga = "Procesando archivo...\n"
-                try {
-                    val jsonString = context.contentResolver.openInputStream(uri)?.bufferedReader().use { it?.readText() }
-                    if (jsonString != null) {
-                        val clientes = ImportManager.procesarJson(jsonString)
-                        if (clientes.isNotEmpty()) {
-                            listaMutable = clientes
-                            CacheManager.guardar(context, clientes)
-                            Toast.makeText(context, "Cargado correctamente", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(context, "Error al cargar", Toast.LENGTH_SHORT).show()
-                } finally {
-                    estaCargando = false
-                }
+        if (uri != null) procesarUriExterna(uri)
+    }
+
+    fun exportarCopiaSeguridad() {
+        if (listaMutable.isEmpty()) {
+            Toast.makeText(context, "No hay datos para exportar", Toast.LENGTH_SHORT).show()
+            return
+        }
+        try {
+            val json = Gson().toJson(listaMutable)
+            val fileName = "CelendinApp_Backup_${System.currentTimeMillis()}.json"
+            val tempFile = File(context.cacheDir, fileName)
+            FileOutputStream(tempFile).use { it.write(json.toByteArray()) }
+
+            val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", tempFile)
+            val intentShare = Intent(Intent.ACTION_SEND).apply {
+                type = "application/json"
+                putExtra(Intent.EXTRA_STREAM, uri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
+            context.startActivity(Intent.createChooser(intentShare, "Guardar copia de seguridad"))
+        } catch (e: Exception) {
+            Toast.makeText(context, "Error al exportar", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -120,8 +216,9 @@ fun MainAppContainer() {
                 }
                 
                 if (listaAcumulada.isNotEmpty()) {
-                    listaMutable = listaAcumulada
-                    CacheManager.guardar(context, listaAcumulada)
+                    val nombreCache = "Nube - ${filtroDistrito ?: "Todo"}"
+                    CacheManager.guardarNuevaEntrada(context, nombreCache, listaAcumulada)
+                    cargarDatosDesdeCache()
                     Toast.makeText(context, "Descarga completada", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
@@ -134,12 +231,12 @@ fun MainAppContainer() {
     }
 
     LaunchedEffect(Unit) {
-        val cache = CacheManager.leer(context)
-        if (!cache.isNullOrEmpty()) {
-            listaMutable = cache
-        } else {
-            delay(500)
-            mostrarDialogoOpciones = true
+        cargarDatosDesdeCache()
+        if (listaMutable.isEmpty()) {
+            if (!seAbrioConArchivoExterno && intent?.action != Intent.ACTION_VIEW) {
+                delay(500)
+                mostrarDialogoOpciones = true
+            }
         }
     }
 
@@ -149,11 +246,30 @@ fun MainAppContainer() {
         } else {
             CelendinDrawerWrapper(
                 clientes = listaMutable, 
+                cacheEntries = cacheEntries,
+                selectedEntryId = selectedEntryId,
+                distritoSeleccionado = distritoSeleccionado,
+                buscadorActivado = buscadorActivado,
+                textoBusqueda = textoBusqueda,
+                onSearchChange = { textoBusqueda = it },
+                onToggleBuscador = { 
+                    buscadorActivado = it 
+                    if (!it) { textoBusqueda = "" }
+                },
+                onCambiarDistrito = { distritoSeleccionado = it },
+                onSelectCache = { id ->
+                    idParaConfirmarCambio = id
+                },
+                onDeleteCache = { id ->
+                    CacheManager.eliminarEntrada(context, id)
+                    cargarDatosDesdeCache()
+                },
                 onAbrirOpcionesImportacion = { mostrarDialogoOpciones = true },
+                onExportarBackup = { exportarCopiaSeguridad() },
                 mapaAbierto = mapaInternoActivado,
                 onToggleMapa = { 
                     mapaInternoActivado = it 
-                    if (!it) clienteSeleccionadoMapa = null // Limpia selección al cerrar
+                    if (!it) clienteSeleccionadoMapa = null
                 },
                 clienteSeleccionado = clienteSeleccionadoMapa,
                 onSeleccionarCliente = { clienteSeleccionadoMapa = it }
@@ -163,19 +279,45 @@ fun MainAppContainer() {
         if (mostrarDialogoOpciones) {
             DialogoImportacion(
                 distritosDisponibles = distritosCelendin,
+                cacheEntries = cacheEntries,
                 onDismiss = { mostrarDialogoOpciones = false },
-                onImportarNuevo = { filePickerLauncher.launch("application/json") },
-                onCargarRespaldo = {
-                    val cache = CacheManager.leer(context)
-                    if (!cache.isNullOrEmpty()) {
-                        listaMutable = cache
-                        Toast.makeText(context, "Respaldo recuperado", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(context, "Sin respaldo guardado", Toast.LENGTH_SHORT).show()
-                    }
+                onImportarNuevo = { filePickerLauncher.launch("*/*") },
+                onCargarRespaldo = { id ->
+                    CacheManager.seleccionarEntrada(context, id)
+                    cargarDatosDesdeCache()
+                    Toast.makeText(context, "Respaldo cargado", Toast.LENGTH_SHORT).show()
                 },
                 onDescargarNube = { distrito -> 
                     ejecutarCargaDatos(distrito)
+                },
+                onAbrirWhatsApp = {
+                    val pm = context.packageManager
+                    val whatsappIntent = pm.getLaunchIntentForPackage("com.whatsapp") ?: pm.getLaunchIntentForPackage("com.whatsapp.w4b")
+                    if (whatsappIntent != null) {
+                        context.startActivity(whatsappIntent)
+                    } else {
+                        Toast.makeText(context, "WhatsApp no instalado", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
+        }
+
+        idParaConfirmarCambio?.let { id ->
+            val entrada = cacheEntries.find { it.id == id }
+            AlertDialog(
+                onDismissRequest = { idParaConfirmarCambio = null },
+                title = { Text("Cambiar Archivo") },
+                text = { Text("¿Deseas cargar los datos de '${entrada?.nombre}'? Se reemplazará la vista actual.") },
+                confirmButton = {
+                    Button(onClick = {
+                        CacheManager.seleccionarEntrada(context, id)
+                        cargarDatosDesdeCache()
+                        idParaConfirmarCambio = null
+                        Toast.makeText(context, "Cargado: ${entrada?.nombre}", Toast.LENGTH_SHORT).show()
+                    }) { Text("CARGAR") }
+                },
+                dismissButton = {
+                    TextButton(onClick = { idParaConfirmarCambio = null }) { Text("CANCELAR") }
                 }
             )
         }
@@ -186,7 +328,18 @@ fun MainAppContainer() {
 @Composable
 fun CelendinDrawerWrapper(
     clientes: List<Cliente>, 
+    cacheEntries: List<CacheEntry>,
+    selectedEntryId: String,
+    distritoSeleccionado: String,
+    buscadorActivado: Boolean,
+    textoBusqueda: String,
+    onSearchChange: (String) -> Unit,
+    onToggleBuscador: (Boolean) -> Unit,
+    onCambiarDistrito: (String) -> Unit,
+    onSelectCache: (String) -> Unit,
+    onDeleteCache: (String) -> Unit,
     onAbrirOpcionesImportacion: () -> Unit,
+    onExportarBackup: () -> Unit,
     mapaAbierto: Boolean,
     onToggleMapa: (Boolean) -> Unit,
     clienteSeleccionado: Cliente?,
@@ -196,9 +349,8 @@ fun CelendinDrawerWrapper(
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    var distritoSeleccionado by remember { mutableStateOf("Todos") }
     var refreshCounter by remember { mutableIntStateOf(0) }
-    val visitadosIds = remember(refreshCounter) { VisitaManager.obtenerVisitados(context) }
+    val visitadosIds = remember(refreshCounter, selectedEntryId) { VisitaManager.obtenerVisitados(context) }
 
     val conteoPorDistrito = remember(clientes) { 
         clientes.groupingBy { it.distrito ?: "Sin Distrito" }.eachCount() 
@@ -220,6 +372,30 @@ fun CelendinDrawerWrapper(
                     },
                     onRefreshClick = onAbrirOpcionesImportacion
                 )
+                
+                Text("ARCHIVOS CARGADOS", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.labelLarge, color = Color.Gray)
+                LazyColumn(modifier = Modifier.heightIn(max = 200.dp)) {
+                    items(cacheEntries) { entry ->
+                        NavigationDrawerItem(
+                            label = {
+                                Row(Modifier.fillMaxWidth(), Arrangement.SpaceBetween, Alignment.CenterVertically) {
+                                    Text(entry.nombre, maxLines = 1, modifier = Modifier.weight(1f))
+                                    IconButton(onClick = { onDeleteCache(entry.id) }, modifier = Modifier.size(24.dp)) {
+                                        Icon(Icons.Default.Delete, null, tint = Color.Red, modifier = Modifier.size(16.dp))
+                                    }
+                                }
+                            },
+                            selected = entry.id == selectedEntryId,
+                            onClick = { 
+                                onSelectCache(entry.id)
+                                scope.launch { drawerState.close() }
+                            },
+                            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                        )
+                    }
+                }
+                HorizontalDivider()
+                Text("DISTRITOS", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.labelLarge, color = Color.Gray)
                 LazyColumn {
                     items(listaDistritos) { distrito ->
                         val cantidad = if (distrito == "Todos") clientes.size else conteoPorDistrito[distrito] ?: 0
@@ -233,7 +409,7 @@ fun CelendinDrawerWrapper(
                             },
                             selected = distrito == distritoSeleccionado,
                             onClick = {
-                                distritoSeleccionado = distrito
+                                onCambiarDistrito(distrito)
                                 scope.launch { drawerState.close() }
                             },
                             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
@@ -250,14 +426,19 @@ fun CelendinDrawerWrapper(
             CelendinScreen(
                 clientes = filtradosPorDistrito,
                 distritoActual = distritoSeleccionado,
+                buscadorActivado = buscadorActivado,
+                textoBusqueda = textoBusqueda,
+                onSearchChange = onSearchChange,
+                onToggleBuscador = onToggleBuscador,
                 visitadosIdsState = visitadosIds,
                 onAbrirDrawer = { scope.launch { drawerState.open() } },
                 onUpdateVisitados = { refreshCounter++ },
                 onAbrirOpcionesImportacion = onAbrirOpcionesImportacion,
+                onExportarBackup = onExportarBackup,
                 mapaInternoActivado = mapaAbierto,
-                onToggleMapa = onToggleMapa,
+                onToggleMapa = { onToggleMapa(it) },
                 clienteSeleccionado = clienteSeleccionado,
-                onSeleccionarCliente = onSeleccionarCliente
+                onSeleccionarCliente = { onSeleccionarCliente(it) }
             )
         }
     }
@@ -268,41 +449,36 @@ fun CelendinDrawerWrapper(
 fun CelendinScreen(
     clientes: List<Cliente>,
     distritoActual: String,
+    buscadorActivado: Boolean,
+    textoBusqueda: String,
+    onSearchChange: (String) -> Unit,
+    onToggleBuscador: (Boolean) -> Unit,
     visitadosIdsState: Set<String>,
     onAbrirDrawer: () -> Unit,
     onUpdateVisitados: () -> Unit,
     onAbrirOpcionesImportacion: () -> Unit,
+    onExportarBackup: () -> Unit,
     mapaInternoActivado: Boolean,
     onToggleMapa: (Boolean) -> Unit,
     clienteSeleccionado: Cliente?,
     onSeleccionarCliente: (Cliente?) -> Unit
 ) {
     val context = LocalContext.current
-    var textoBusqueda by remember { mutableStateOf("") }
     var localidadSeleccionada by remember { mutableStateOf("Todos") }
-    var buscadorActivado by remember { mutableStateOf(false) }
     var visitadosIds by remember { mutableStateOf(visitadosIdsState) }
     var tabSeleccionada by remember { mutableStateOf("inicio") }
-    var buscandoGps by remember { mutableStateOf(false) }
     var menuMenuDesplegable by remember { mutableStateOf(false) }
 
     val fusedLocationClient: FusedLocationProviderClient = remember { LocationServices.getFusedLocationProviderClient(context) }
     var miUbicacion by remember { mutableStateOf<Location?>(null) }
-    var radarExpandido by remember { mutableStateOf(false) }
-    var radarActivo by remember { mutableStateOf(false) }
 
     @SuppressLint("MissingPermission")
     fun obtenerUbicacionReal() {
-        buscandoGps = true
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
-                buscandoGps = false
                 if (location != null) {
                     miUbicacion = location
                 }
-            }
-            .addOnFailureListener {
-                buscandoGps = false
             }
     }
 
@@ -320,40 +496,45 @@ fun CelendinScreen(
 
     LaunchedEffect(visitadosIdsState) { visitadosIds = visitadosIdsState }
 
-    val filtrados = remember(clientes, textoBusqueda, localidadSeleccionada, tabSeleccionada, visitadosIds, miUbicacion, radarActivo) {
-        val base = clientes.filter { cl ->
-            val nombresCompletos = "${cl.nombres ?: ""} ${cl.apellidoPaterno ?: ""} ${cl.codigoSuministro ?: ""}"
+    val filtrados = remember(clientes, textoBusqueda, localidadSeleccionada, tabSeleccionada, visitadosIds, miUbicacion) {
+        clientes.filter { cl ->
+            val nombresCompletos = "${cl.nombres ?: ""} ${cl.apellidoPaterno ?: ""} ${cl.apellidoMaterno ?: ""} ${cl.codigoSuministro ?: ""}"
             val matchesText = textoBusqueda.isEmpty() || nombresCompletos.contains(textoBusqueda, ignoreCase = true)
             val matchesLoc = localidadSeleccionada == "Todos" || (cl.localidad ?: "Sin Localidad") == localidadSeleccionada
             val matchesTab = if (tabSeleccionada == "visitas") visitadosIds.contains(cl.codigoSuministro ?: "") else true
             matchesText && matchesLoc && matchesTab
         }
-
-        if (radarActivo && miUbicacion != null) {
-            base.map { cl ->
-                val results = FloatArray(1)
-                Location.distanceBetween(miUbicacion!!.latitude, miUbicacion!!.longitude, cl.latitud?.toDoubleOrNull() ?: 0.0, cl.longitud?.toDoubleOrNull() ?: 0.0, results)
-                Pair(cl, results[0])
-            }
-                .filter { it.second <= 1000 }
-                .sortedByDescending { it.first.latitud?.toDoubleOrNull() ?: 0.0 }
-                .map { it.first }
-        } else {
-            base
-        }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(Modifier.fillMaxSize()) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { HeaderTitle(distritoActual, filtrados.size, clientes.size, buscadorActivado, textoBusqueda) { textoBusqueda = it } },
+                    title = { 
+                        HeaderTitle(
+                            distrito = distritoActual, 
+                            found = filtrados.size, 
+                            total = clientes.size, 
+                            searching = buscadorActivado, 
+                            textoBusqueda = textoBusqueda,
+                            localidadSeleccionada = localidadSeleccionada,
+                            listaLocalidades = remember(clientes) { listOf("Todos") + clientes.map { it.localidad ?: "Sin Localidad" }.distinct().sorted() },
+                            onSearch = onSearchChange,
+                            onLocalidadChange = { localidadSeleccionada = it },
+                            onCloseSearch = { 
+                                onToggleBuscador(false) 
+                                localidadSeleccionada = "Todos"
+                                miUbicacion = null
+                            }
+                        ) 
+                    },
                     navigationIcon = { IconButton(onClick = onAbrirDrawer) { Icon(Icons.Default.Menu, null, tint = Color.White) } },
                     actions = {
-                        IconButton(onClick = {
-                            buscadorActivado = !buscadorActivado
-                            if (!buscadorActivado) { textoBusqueda = ""; localidadSeleccionada = "Todos"; miUbicacion = null }
-                        }) { Icon(if (buscadorActivado || miUbicacion != null) Icons.Default.Close else Icons.Default.Search, null, tint = Color.White) }
+                        if (!buscadorActivado) {
+                            IconButton(onClick = { onToggleBuscador(true) }) { 
+                                Icon(Icons.Default.Search, null, tint = Color.White) 
+                            }
+                        }
 
                         Box {
                             IconButton(onClick = { menuMenuDesplegable = true }) {
@@ -373,15 +554,6 @@ fun CelendinScreen(
                                     leadingIcon = { Icon(Icons.Default.LocationOn, null) }
                                 )
                                 DropdownMenuItem(
-                                    text = { Text(if (radarActivo) "Desactivar Radar" else "Activar Radar") },
-                                    onClick = {
-                                        menuMenuDesplegable = false
-                                        radarActivo = !radarActivo
-                                        if (radarActivo) iniciarUbicacion()
-                                    },
-                                    leadingIcon = { Icon(Icons.Default.LocationOn, null) }
-                                )
-                                DropdownMenuItem(
                                     text = { Text("Opciones de Padrón") },
                                     onClick = {
                                         menuMenuDesplegable = false
@@ -389,10 +561,19 @@ fun CelendinScreen(
                                     },
                                     leadingIcon = { Icon(Icons.Default.Settings, null) }
                                 )
+                                HorizontalDivider()
+                                DropdownMenuItem(
+                                    text = { Text("Exportar Copia Seguridad") },
+                                    onClick = {
+                                        menuMenuDesplegable = false
+                                        onExportarBackup()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Share, null) }
+                                )
                             }
                         }
                     },
-                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF575775))
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF455A64))
                 )
             },
             bottomBar = {
@@ -400,6 +581,21 @@ fun CelendinScreen(
                     NavigationBarItem(selected = tabSeleccionada == "inicio", onClick = { tabSeleccionada = "inicio"; miUbicacion = null }, label = { Text(distritoActual) }, icon = { Icon(painterResource(id = R.drawable.ic_home), null, tint = Color.Unspecified) })
                     NavigationBarItem(selected = tabSeleccionada == "visitas", onClick = { tabSeleccionada = "visitas"; miUbicacion = null }, label = { Text("Visitas") }, icon = { Icon(painterResource(id = R.drawable.ic_check_circle_outline), null, tint = Color.Unspecified) })
                     NavigationBarItem(selected = false, onClick = { MapaUtils.enviarReporteWhatsApp(context, clientes, visitadosIds) }, label = { Text("Reporte") }, icon = { Icon(painterResource(id = R.drawable.ic_whatsapp), null, tint = Color.Unspecified) })
+                }
+            },
+            floatingActionButton = {
+                if (clientes.isNotEmpty() && !mapaInternoActivado) {
+                    FloatingActionButton(
+                        onClick = {
+                            onToggleMapa(true)
+                            iniciarUbicacion()
+                        },
+                        containerColor = Color(0xFF2196F3),
+                        contentColor = Color.White,
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Icon(Icons.Default.Place, contentDescription = "Ver Mapa")
+                    }
                 }
             }
         ) { padding ->
@@ -409,20 +605,6 @@ fun CelendinScreen(
                 .background(Color(0xFFC3CED4))
             ) {
                 Column(Modifier.fillMaxSize()) {
-                    if (buscadorActivado) SelectorLocalidadComponent(localidadSeleccionada, remember(clientes) { listOf("Todos") + clientes.map { it.localidad ?: "Sin Localidad" }.distinct().sorted() }) { localidadSeleccionada = it }
-
-                    if (radarActivo && miUbicacion != null) {
-                        if (filtrados.isNotEmpty()) {
-                            Button(onClick = {
-                                radarExpandido = true
-                            }, modifier = Modifier.fillMaxWidth().padding(8.dp), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2980B9)), shape = RoundedCornerShape(8.dp)) {
-                                Icon(Icons.Default.Place, null)
-                                Spacer(Modifier.width(8.dp))
-                                Text("BARRIDO NORTE A SUR")
-                            }
-                        }
-                    }
-
                     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(8.dp)) {
                         items(filtrados) { cliente ->
                             TarjetaCliente(
@@ -430,7 +612,7 @@ fun CelendinScreen(
                                 yaVisitado = visitadosIds.contains(cliente.codigoSuministro ?: ""), 
                                 miUbicacion = miUbicacion, 
                                 onVerMapa = { 
-                                    onSeleccionarCliente(cliente) // MARCA ESTE CLIENTE
+                                    onSeleccionarCliente(cliente)
                                     onToggleMapa(true)
                                     iniciarUbicacion()
                                 },
@@ -445,26 +627,24 @@ fun CelendinScreen(
                         }
                     }
                 }
-
-                if (radarExpandido && miUbicacion != null) {
-                    RadarMinimap(miUbicacion = miUbicacion!!, clientesCercanos = filtrados, visitadosIds = visitadosIds, onDismiss = { radarExpandido = false })
-                }
             }
         }
 
         if (mapaInternoActivado) {
-            MapaGoogle(
-                miUbicacion = miUbicacion, 
-                clientes = filtrados, 
-                visitadosIds = visitadosIds,
-                clienteSeleccionado = clienteSeleccionado, // PASAMOS LA SELECCIÓN
-                onToggleVisita = { id ->
-                    if (visitadosIds.contains(id)) VisitaManager.quitarVisita(context, id)
-                    else VisitaManager.guardarVisita(context, id)
-                    onUpdateVisitados()
-                },
-                onDismiss = { onToggleMapa(false) }
-            )
+            Box(Modifier.fillMaxSize().background(Color.Black)) {
+                MapaGoogle(
+                    miUbicacion = miUbicacion, 
+                    clientes = filtrados, 
+                    visitadosIds = visitadosIds,
+                    clienteSeleccionado = clienteSeleccionado,
+                    onToggleVisita = { id ->
+                        if (visitadosIds.contains(id)) VisitaManager.quitarVisita(context, id)
+                        else VisitaManager.guardarVisita(context, id)
+                        onUpdateVisitados()
+                    },
+                    onDismiss = { onToggleMapa(false) }
+                )
+            }
         }
     }
 }

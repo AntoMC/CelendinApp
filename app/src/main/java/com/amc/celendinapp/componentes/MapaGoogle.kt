@@ -1,17 +1,20 @@
 package com.amc.celendinapp.componentes
 
 import android.location.Location
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.amc.celendinapp.R
 import com.amc.celendinapp.model.Cliente
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -37,12 +40,13 @@ fun MapaGoogle(
 
     var clienteParaDialogo by remember { mutableStateOf<Cliente?>(null) }
     var tipoMapa by remember { mutableStateOf(MapType.SATELLITE) }
+    var mapaCargado by remember { mutableStateOf(false) }
 
     // Efecto para encuadrar los suministros filtrados o el seleccionado
     LaunchedEffect(clientes, clienteSeleccionado) {
         if (clienteSeleccionado != null) {
-            val lat = clienteSeleccionado.latitud?.toDoubleOrNull()
-            val lon = clienteSeleccionado.longitud?.toDoubleOrNull()
+            val lat = clienteSeleccionado.latitud?.replace(",", ".")?.toDoubleOrNull()
+            val lon = clienteSeleccionado.longitud?.replace(",", ".")?.toDoubleOrNull()
             if (lat != null && lon != null) {
                 cameraPositionState.animate(
                     update = CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 18f)
@@ -52,8 +56,8 @@ fun MapaGoogle(
             val builder = LatLngBounds.builder()
             var hayCoordenadas = false
             clientes.forEach { cl ->
-                val lat = cl.latitud?.toDoubleOrNull()
-                val lon = cl.longitud?.toDoubleOrNull()
+                val lat = cl.latitud?.replace(",", ".")?.toDoubleOrNull()
+                val lon = cl.longitud?.replace(",", ".")?.toDoubleOrNull()
                 if (lat != null && lon != null) {
                     builder.include(LatLng(lat, lon))
                     hayCoordenadas = true
@@ -78,74 +82,78 @@ fun MapaGoogle(
                 mapType = tipoMapa
             ),
             uiSettings = MapUiSettings(
-                zoomControlsEnabled = true,
+                zoomControlsEnabled = false,
                 myLocationButtonEnabled = true
-            )
+            ),
+            onMapLoaded = {
+                mapaCargado = true
+            }
         ) {
             clientes.forEach { cliente ->
-                val lat = cliente.latitud?.toDoubleOrNull()
-                val lon = cliente.longitud?.toDoubleOrNull()
+                val lat = cliente.latitud?.replace(",", ".")?.toDoubleOrNull()
+                val lon = cliente.longitud?.replace(",", ".")?.toDoubleOrNull()
                 if (lat != null && lon != null) {
                     val esVisitado = visitadosIds.contains(cliente.codigoSuministro ?: "")
                     val esElSeleccionado = cliente.codigoSuministro == clienteSeleccionado?.codigoSuministro
                     
-                    val markerState = rememberMarkerState(key = cliente.codigoSuministro, position = LatLng(lat, lon))
-                    
-                    // Abrir descripción automáticamente si es el seleccionado
-                    if (esElSeleccionado) {
-                        LaunchedEffect(Unit) {
-                            markerState.showInfoWindow()
-                        }
-                    }
+                    val nombreCompleto = listOfNotNull(cliente.nombres, cliente.apellidoPaterno, cliente.apellidoMaterno)
+                        .filter { it.isNotBlank() }
+                        .joinToString(" ")
 
+                    // Marcador tradicional (PIN)
                     Marker(
-                        state = markerState,
-                        title = "SUM: ${cliente.codigoSuministro ?: ""}",
-                        snippet = "${cliente.nombres ?: ""} ${cliente.apellidoPaterno ?: ""}",
+                        state = rememberMarkerState(key = cliente.codigoSuministro, position = LatLng(lat, lon)),
+                        title = "SUM: ${cliente.codigoSuministro?.removePrefix("KMZ-") ?: ""}",
+                        snippet = "$nombreCompleto | ${cliente.localidad ?: ""}",
                         icon = BitmapDescriptorFactory.defaultMarker(
                             when {
-                                esElSeleccionado -> BitmapDescriptorFactory.HUE_AZURE // Azul para el buscado individualmente
-                                esVisitado -> BitmapDescriptorFactory.HUE_GREEN      // Verde para visitados
-                                else -> BitmapDescriptorFactory.HUE_RED              // Rojo para pendientes
+                                esElSeleccionado -> BitmapDescriptorFactory.HUE_AZURE // AZUL
+                                esVisitado -> BitmapDescriptorFactory.HUE_GREEN      // VERDE
+                                else -> BitmapDescriptorFactory.HUE_RED              // ROJO
                             }
                         ),
-                        onClick = {
-                            false // Google Maps abrirá el InfoWindow automáticamente
-                        },
                         onInfoWindowLongClick = {
+                            // Long click en la etiqueta abre el diálogo
                             clienteParaDialogo = cliente
+                        },
+                        onClick = {
+                            // Click normal muestra el tooltip (comportamiento por defecto)
+                            it.showInfoWindow()
+                            true
                         }
                     )
                 }
             }
         }
         
-        // Botones superiores con padding para no tapar nada
-        Row(
+        // Botones superiores
+        AnimatedVisibility(
+            visible = mapaCargado,
+            enter = fadeIn(),
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .padding(16.dp)
         ) {
-            SmallFloatingActionButton(
-                onClick = onDismiss,
-                containerColor = Color.White
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Icon(Icons.Default.Close, contentDescription = "Cerrar Mapa")
-            }
+                SmallFloatingActionButton(onClick = onDismiss, containerColor = Color.White, contentColor = Color.Black) {
+                    Icon(Icons.Default.Close, contentDescription = "Cerrar Mapa")
+                }
 
-            SmallFloatingActionButton(
-                onClick = { 
-                    tipoMapa = if (tipoMapa == MapType.SATELLITE) MapType.NORMAL else MapType.SATELLITE 
-                },
-                containerColor = Color.White
-            ) {
-                Icon(Icons.Default.Settings, contentDescription = "Cambiar Tipo de Mapa")
+                SmallFloatingActionButton(
+                    onClick = { tipoMapa = if (tipoMapa == MapType.SATELLITE) MapType.NORMAL else MapType.SATELLITE },
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.ic_capa), contentDescription = "Cambiar Tipo de Mapa", modifier = Modifier.size(20.dp))
+                }
             }
         }
 
-        // Diálogo para marcar como visitado
+        // Diálogo para gestionar visita
         clienteParaDialogo?.let { cliente ->
             val esVisitado = visitadosIds.contains(cliente.codigoSuministro ?: "")
             AlertDialog(
@@ -153,8 +161,11 @@ fun MapaGoogle(
                 title = { Text("Gestión de Visita") },
                 text = { 
                     Column {
+                        val nombreCompleto = listOfNotNull(cliente.nombres, cliente.apellidoPaterno, cliente.apellidoMaterno)
+                            .filter { it.isNotBlank() }
+                            .joinToString(" ")
                         Text("Suministro: ${cliente.codigoSuministro ?: ""}", fontWeight = FontWeight.Bold)
-                        Text("Beneficiario: ${cliente.nombres ?: ""} ${cliente.apellidoPaterno ?: ""}")
+                        Text("Beneficiario: $nombreCompleto")
                         Spacer(Modifier.height(8.dp))
                         Text("¿Deseas marcar como ${if (esVisitado) "PENDIENTE" else "VISITADO"}?")
                     }

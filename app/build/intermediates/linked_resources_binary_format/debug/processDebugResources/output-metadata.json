@@ -8,30 +8,12 @@
   "variantName": "debug",
   "elements": [
     {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
-          "value": "armeabi-v7a"
-        }
-      ],
+      "type": "SINGLE",
+      "filters": [],
       "attributes": [],
       "versionCode": 1,
       "versionName": "1.0",
-      "outputFile": "linked-resources-binary-format-armeabi-v7aDebug.ap_"
-    },
-    {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
-          "value": "arm64-v8a"
-        }
-      ],
-      "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "linked-resources-binary-format-arm64-v8aDebug.ap_"
+      "outputFile": "linked-resources-binary-format-debug.ap_"
     }
   ],
   "elementType": "File"
