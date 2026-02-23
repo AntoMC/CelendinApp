@@ -22554,8 +22554,13 @@ com.amc.celendinapp.FileUtils
 com.amc.celendinapp.ImportManager:
     public static final int $stable
 com.amc.celendinapp.JsonUtils
+com.amc.celendinapp.MainActivity$Companion:
+    public final android.net.Uri getIntentUriTemporal()
+    public final void setIntentUriTemporal(android.net.Uri)
 com.amc.celendinapp.MainActivity:
     public static final int $stable
+    public static final synthetic android.net.Uri access$getIntentUriTemporal$cp()
+    public static final synthetic void access$setIntentUriTemporal$cp(android.net.Uri)
 com.amc.celendinapp.MainActivityKt$CelendinDrawerWrapper$1$1$invoke$lambda$5$lambda$4$$inlined$items$default$2
 com.amc.celendinapp.MainActivityKt$CelendinDrawerWrapper$1$1$invoke$lambda$9$lambda$8$$inlined$items$default$2
 com.amc.celendinapp.MainActivityKt$CelendinScreen$2$4$invoke$lambda$6$lambda$5$lambda$4$lambda$3$$inlined$items$default$2
