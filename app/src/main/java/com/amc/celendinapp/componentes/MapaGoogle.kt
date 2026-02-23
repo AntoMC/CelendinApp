@@ -133,18 +133,19 @@ fun MapaGoogle(
         
         // Botones superiores
         AnimatedVisibility(
-            visible = mapaCargado,
+            //visible = mapaCargado,
+            visible = true,
             enter = fadeIn(),
             modifier = Modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
-                .padding(16.dp)
+                //.statusBarsPadding()
+                .padding(8.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                SmallFloatingActionButton(onClick = onDismiss, containerColor = Color.White, contentColor = Color.Black) {
+                SmallFloatingActionButton(onClick = onDismiss, containerColor = Color.Yellow, contentColor = Color.Black) {
                     Icon(Icons.Default.Close, contentDescription = "Cerrar Mapa")
                 }
 

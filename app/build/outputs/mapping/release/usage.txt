@@ -3810,11 +3810,8 @@ androidx.compose.foundation.layout.SizeNode:
     public final float getMinHeight-D9Ej5fM()
     public final float getMinWidth-D9Ej5fM()
 androidx.compose.foundation.layout.SplineBasedFloatDecayAnimationSpec
-androidx.compose.foundation.layout.SystemInsetsPaddingModifierElement:
-    public void inspectableProperties(androidx.compose.ui.platform.InspectorInfo)
-androidx.compose.foundation.layout.SystemInsetsPaddingModifierNode:
-    public final androidx.compose.foundation.layout.WindowInsetsHolder getWindowInsetsHolder()
-    public final void setWindowInsetsHolder(androidx.compose.foundation.layout.WindowInsetsHolder)
+androidx.compose.foundation.layout.SystemInsetsPaddingModifierElement
+androidx.compose.foundation.layout.SystemInsetsPaddingModifierNode
 androidx.compose.foundation.layout.UnionInsetsConsumingModifierElement
 androidx.compose.foundation.layout.UnionInsetsConsumingModifierNode
 androidx.compose.foundation.layout.UnspecifiedConstraintsElement:
@@ -3853,6 +3850,7 @@ androidx.compose.foundation.layout.WindowInsetsHolder:
     public final androidx.compose.foundation.layout.WindowInsets getSafeContent()
     public final androidx.compose.foundation.layout.WindowInsets getSafeDrawing()
     public final androidx.compose.foundation.layout.WindowInsets getSafeGestures()
+    public final androidx.compose.foundation.layout.AndroidWindowInsets getStatusBars()
     public final androidx.compose.foundation.layout.ValueInsets getStatusBarsIgnoringVisibility()
     public final androidx.compose.foundation.layout.ValueInsets getSystemBarsIgnoringVisibility()
     public final androidx.compose.foundation.layout.AndroidWindowInsets getSystemGestures()
@@ -3888,32 +3886,11 @@ androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$navigationBarsP
 androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$safeContentPadding$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$safeDrawingPadding$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$safeGesturesPadding$$inlined$debugInspectorInfo$1
+androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$statusBarsPadding$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$systemBarsPadding$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$systemGesturesPadding$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.WindowInsetsPadding_androidKt$waterfallPadding$$inlined$debugInspectorInfo$1
-androidx.compose.foundation.layout.WindowInsetsPadding_androidKt:
-    public static final androidx.compose.ui.Modifier captionBarPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets captionBarPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier displayCutoutPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets displayCutoutPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier imePadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets imePadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier mandatorySystemGesturesPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets mandatorySystemGesturesPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier navigationBarsPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets navigationBarsPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier safeContentPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets safeContentPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier safeDrawingPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets safeDrawingPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier safeGesturesPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets safeGesturesPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier systemBarsPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets systemBarsPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier systemGesturesPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets systemGesturesPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
-    public static final androidx.compose.ui.Modifier waterfallPadding(androidx.compose.ui.Modifier)
-    private static final androidx.compose.foundation.layout.WindowInsets waterfallPadding$lambda$1(androidx.compose.foundation.layout.WindowInsetsHolder)
+androidx.compose.foundation.layout.WindowInsetsPadding_androidKt
 androidx.compose.foundation.layout.WindowInsetsSides$Companion:
     public final int getEnd-JoeWqyM()
     public final int getLeft-JoeWqyM()
@@ -5855,7 +5832,6 @@ androidx.compose.material.icons.filled.KeyboardArrowLeftKt
 androidx.compose.material.icons.filled.KeyboardArrowRightKt
 androidx.compose.material.icons.filled.KeyboardArrowUpKt
 androidx.compose.material.icons.filled.ListKt
-androidx.compose.material.icons.filled.LocationOnKt
 androidx.compose.material.icons.filled.LockKt
 androidx.compose.material.icons.filled.MailOutlineKt
 androidx.compose.material.icons.filled.NotificationsKt
@@ -11779,7 +11755,6 @@ androidx.compose.ui.graphics.Color$Companion:
     public static synthetic void getTransparent-0d7_KjU$annotations()
     public static synthetic void getUnspecified-0d7_KjU$annotations()
     public static synthetic void getWhite-0d7_KjU$annotations()
-    public final long getYellow-0d7_KjU()
     public static synthetic void getYellow-0d7_KjU$annotations()
     public final long hsl-JlNiLsg(float,float,float,float,androidx.compose.ui.graphics.colorspace.Rgb)
     public static synthetic long hsl-JlNiLsg$default(androidx.compose.ui.graphics.Color$Companion,float,float,float,float,androidx.compose.ui.graphics.colorspace.Rgb,int,java.lang.Object)
@@ -11790,7 +11765,6 @@ androidx.compose.ui.graphics.Color$Companion:
 androidx.compose.ui.graphics.Color:
     public static final synthetic long access$getCyan$cp()
     public static final synthetic long access$getMagenta$cp()
-    public static final synthetic long access$getYellow$cp()
     public static final float component1-impl(long)
     public static final float component2-impl(long)
     public static final float component3-impl(long)
@@ -22554,16 +22528,11 @@ com.amc.celendinapp.FileUtils
 com.amc.celendinapp.ImportManager:
     public static final int $stable
 com.amc.celendinapp.JsonUtils
-com.amc.celendinapp.MainActivity$Companion:
-    public final android.net.Uri getIntentUriTemporal()
-    public final void setIntentUriTemporal(android.net.Uri)
 com.amc.celendinapp.MainActivity:
     public static final int $stable
-    public static final synthetic android.net.Uri access$getIntentUriTemporal$cp()
-    public static final synthetic void access$setIntentUriTemporal$cp(android.net.Uri)
 com.amc.celendinapp.MainActivityKt$CelendinDrawerWrapper$1$1$invoke$lambda$5$lambda$4$$inlined$items$default$2
 com.amc.celendinapp.MainActivityKt$CelendinDrawerWrapper$1$1$invoke$lambda$9$lambda$8$$inlined$items$default$2
-com.amc.celendinapp.MainActivityKt$CelendinScreen$2$4$invoke$lambda$6$lambda$5$lambda$4$lambda$3$$inlined$items$default$2
+com.amc.celendinapp.MainActivityKt$CelendinScreen$5$invoke$lambda$11$lambda$5$lambda$4$lambda$3$$inlined$items$default$2
 com.amc.celendinapp.MainActivityKt:
     static synthetic void MainAppContainer$ejecutarCargaDatos$default(kotlinx.coroutines.CoroutineScope,androidx.compose.runtime.MutableState,androidx.compose.runtime.MutableState,android.content.Context,androidx.compose.runtime.snapshots.SnapshotStateList,androidx.compose.runtime.MutableState,androidx.compose.runtime.MutableState,androidx.compose.runtime.MutableState,java.lang.String,int,java.lang.Object)
 com.amc.celendinapp.MapaUtils$agruparYOrdenarNorteSur$$inlined$sortedByDescending$1
@@ -22603,6 +22572,8 @@ com.amc.celendinapp.componentes.ConfirmDialogKt$ConfirmDialog$4
 com.amc.celendinapp.componentes.ConfirmDialogKt
 com.amc.celendinapp.componentes.DialogoImportacionKt$DialogoImportacion$4$invoke$lambda$16$lambda$11$lambda$10$$inlined$items$default$2
 com.amc.celendinapp.componentes.DialogoImportacionKt$DialogoImportacion$4$invoke$lambda$16$lambda$15$lambda$14$$inlined$items$default$2
+com.amc.celendinapp.componentes.MapaGoogleKt:
+    private static final boolean MapaGoogle$lambda$8(androidx.compose.runtime.MutableState)
 com.amc.celendinapp.componentes.RadarMinimapKt$RadarMinimap$1$1
 com.amc.celendinapp.componentes.RadarMinimapKt$RadarMinimap$2$1$1
 com.amc.celendinapp.componentes.RadarMinimapKt$RadarMinimap$4
