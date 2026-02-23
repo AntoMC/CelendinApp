@@ -45,7 +45,7 @@ fun DialogoImportacion(
                     "principal" -> {
                         OpcionImportar(
                             titulo = "Seleccionar Archivo JSON/KMZ",
-                            subtitulo = "Uso offline (Archivo GIS)",
+                            subtitulo = "busca en el explorador",
                             icono = Icons.Default.Add,
                             onClick = { onImportarNuevo(); onDismiss() }
                         )
@@ -58,13 +58,13 @@ fun DialogoImportacion(
                         )
                         OpcionImportar(
                             titulo = "Usar Respaldo Local",
-                            subtitulo = "Historial de archivos cargados",
+                            subtitulo = "Abre archivos cargados previamente",
                             icono = Icons.Default.Refresh,
                             onClick = { vistaActual = "respaldo" }
                         )
                         OpcionImportar(
-                            titulo = "Descargar por Distrito",
-                            subtitulo = "Descarga nube y prepara offline",
+                            titulo = "Descargar desde el servidor",
+                            subtitulo = "Adinelsa",
                             icono = Icons.Default.Info,
                             onClick = { vistaActual = "distritos" }
                         )
