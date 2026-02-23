@@ -103,8 +103,7 @@ fun MainAppContainer(intent: Intent? = null) {
                         result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))
                     }
                 }
-            } catch (e: Exception) {
-            }
+            } catch (e: Exception) {}
         }
         if (result == null) {
             result = uri.path
@@ -266,7 +265,7 @@ fun MainAppContainer(intent: Intent? = null) {
                 },
                 onAbrirOpcionesImportacion = { mostrarDialogoOpciones = true },
                 onExportarBackup = { exportarCopiaSeguridad() },
-                mapaAbierto = mapaInternoActivado,
+                mapaInternoActivado = mapaInternoActivado,
                 onToggleMapa = { 
                     mapaInternoActivado = it 
                     if (!it) clienteSeleccionadoMapa = null
@@ -340,7 +339,7 @@ fun CelendinDrawerWrapper(
     onDeleteCache: (String) -> Unit,
     onAbrirOpcionesImportacion: () -> Unit,
     onExportarBackup: () -> Unit,
-    mapaAbierto: Boolean,
+    mapaInternoActivado: Boolean,
     onToggleMapa: (Boolean) -> Unit,
     clienteSeleccionado: Cliente?,
     onSeleccionarCliente: (Cliente?) -> Unit
@@ -361,7 +360,7 @@ fun CelendinDrawerWrapper(
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        gesturesEnabled = !mapaAbierto,
+        gesturesEnabled = !mapaInternoActivado,
         drawerContent = {
             ModalDrawerSheet(modifier = Modifier.fillMaxWidth(0.75f)) {
                 HeaderDrawer(
@@ -435,7 +434,7 @@ fun CelendinDrawerWrapper(
                 onUpdateVisitados = { refreshCounter++ },
                 onAbrirOpcionesImportacion = onAbrirOpcionesImportacion,
                 onExportarBackup = onExportarBackup,
-                mapaInternoActivado = mapaAbierto,
+                mapaInternoActivado = mapaInternoActivado,
                 onToggleMapa = { onToggleMapa(it) },
                 clienteSeleccionado = clienteSeleccionado,
                 onSeleccionarCliente = { onSeleccionarCliente(it) }
@@ -545,15 +544,6 @@ fun CelendinScreen(
                                 onDismissRequest = { menuMenuDesplegable = false }
                             ) {
                                 DropdownMenuItem(
-                                    text = { Text("Ver en Mapa Google") },
-                                    onClick = {
-                                        menuMenuDesplegable = false
-                                        onToggleMapa(true)
-                                        iniciarUbicacion()
-                                    },
-                                    leadingIcon = { Icon(Icons.Default.LocationOn, null) }
-                                )
-                                DropdownMenuItem(
                                     text = { Text("Opciones de Padrón") },
                                     onClick = {
                                         menuMenuDesplegable = false
@@ -631,7 +621,7 @@ fun CelendinScreen(
         }
 
         if (mapaInternoActivado) {
-            Box(Modifier.fillMaxSize().background(Color.Black)) {
+            Box(Modifier.fillMaxSize()) {
                 MapaGoogle(
                     miUbicacion = miUbicacion, 
                     clientes = filtrados, 
