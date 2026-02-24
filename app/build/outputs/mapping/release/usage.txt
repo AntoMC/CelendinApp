@@ -22532,7 +22532,7 @@ com.amc.celendinapp.MainActivity:
     public static final int $stable
 com.amc.celendinapp.MainActivityKt$CelendinDrawerWrapper$1$1$invoke$lambda$5$lambda$4$$inlined$items$default$2
 com.amc.celendinapp.MainActivityKt$CelendinDrawerWrapper$1$1$invoke$lambda$9$lambda$8$$inlined$items$default$2
-com.amc.celendinapp.MainActivityKt$CelendinScreen$5$invoke$lambda$11$lambda$5$lambda$4$lambda$3$$inlined$items$default$2
+com.amc.celendinapp.MainActivityKt$CelendinScreen$2$4$invoke$lambda$6$lambda$5$lambda$4$lambda$3$$inlined$items$default$2
 com.amc.celendinapp.MainActivityKt:
     static synthetic void MainAppContainer$ejecutarCargaDatos$default(kotlinx.coroutines.CoroutineScope,androidx.compose.runtime.MutableState,androidx.compose.runtime.MutableState,android.content.Context,androidx.compose.runtime.snapshots.SnapshotStateList,androidx.compose.runtime.MutableState,androidx.compose.runtime.MutableState,androidx.compose.runtime.MutableState,java.lang.String,int,java.lang.Object)
 com.amc.celendinapp.MapaUtils$agruparYOrdenarNorteSur$$inlined$sortedByDescending$1

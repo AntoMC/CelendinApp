@@ -61,7 +61,6 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        // Capturamos el nuevo archivo si la app ya estaba abierta
         intentUri.value = intent.data
     }
 }
@@ -167,7 +166,7 @@ fun MainAppContainer(externalUri: MutableState<Uri?>) {
         }
     }
 
-    // EFECTO REACTIVO PARA ARCHIVOS EXTERNOS
+    // EFECTO REACTIVO PARA ARCHIVOS EXTERNOS (WhatsApp, etc.)
     LaunchedEffect(externalUri.value) {
         externalUri.value?.let { uri ->
             procesarUriExterna(uri)
@@ -509,6 +508,7 @@ fun CelendinScreen(
 
     LaunchedEffect(visitadosIdsState) { visitadosIds = visitadosIdsState }
 
+    // FILTRO ÚNICO PARA LISTA Y MAPA
     val filtrados = remember(clientes, textoBusqueda, localidadSeleccionada, tabSeleccionada, visitadosIds, miUbicacion) {
         clientes.filter { cl ->
             val nombresCompletos = "${cl.nombres ?: ""} ${cl.apellidoPaterno ?: ""} ${cl.apellidoMaterno ?: ""} ${cl.codigoSuministro ?: ""}"
@@ -519,142 +519,145 @@ fun CelendinScreen(
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { 
-                    HeaderTitle(
-                        distrito = distritoActual, 
-                        found = filtrados.size, 
-                        total = clientes.size, 
-                        searching = buscadorActivado, 
-                        textoBusqueda = textoBusqueda,
-                        localidadSeleccionada = localidadSeleccionada,
-                        listaLocalidades = remember(clientes) { listOf("Todos") + clientes.map { it.localidad ?: "Sin Localidad" }.distinct().sorted() },
-                        onSearch = onSearchChange,
-                        onLocalidadChange = { localidadSeleccionada = it },
-                        onCloseSearch = { 
-                            onToggleBuscador(false) 
-                            localidadSeleccionada = "Todos"
-                            miUbicacion = null
+    Box(Modifier.fillMaxSize()) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { 
+                        HeaderTitle(
+                            distrito = distritoActual, 
+                            found = filtrados.size, 
+                            total = clientes.size, 
+                            searching = buscadorActivado, 
+                            textoBusqueda = textoBusqueda,
+                            localidadSeleccionada = localidadSeleccionada,
+                            listaLocalidades = remember(clientes) { listOf("Todos") + clientes.map { it.localidad ?: "Sin Localidad" }.distinct().sorted() },
+                            onSearch = onSearchChange,
+                            onLocalidadChange = { localidadSeleccionada = it },
+                            onCloseSearch = { 
+                                onToggleBuscador(false) 
+                                localidadSeleccionada = "Todos"
+                                miUbicacion = null
+                            }
+                        ) 
+                    },
+                    navigationIcon = { IconButton(onClick = onAbrirDrawer) { Icon(Icons.Default.Menu, null, tint = Color.White) } },
+                    actions = {
+                        if (!buscadorActivado) {
+                            IconButton(onClick = { onToggleBuscador(true) }) { 
+                                Icon(Icons.Default.Search, null, tint = Color.White) 
+                            }
                         }
-                    ) 
-                },
-                navigationIcon = { IconButton(onClick = onAbrirDrawer) { Icon(Icons.Default.Menu, null, tint = Color.White) } },
-                actions = {
-                    if (!buscadorActivado) {
-                        IconButton(onClick = { onToggleBuscador(true) }) { 
-                            Icon(Icons.Default.Search, null, tint = Color.White) 
-                        }
-                    }
 
-                    Box {
-                        IconButton(onClick = { menuMenuDesplegable = true }) {
-                            Icon(Icons.Default.MoreVert, null, tint = Color.White)
+                        Box {
+                            IconButton(onClick = { menuMenuDesplegable = true }) {
+                                Icon(Icons.Default.MoreVert, null, tint = Color.White)
+                            }
+                            DropdownMenu(
+                                expanded = menuMenuDesplegable,
+                                onDismissRequest = { menuMenuDesplegable = false }
+                            ) {
+                                DropdownMenuItem(
+                                    text = { Text("Ver en Mapa Google") },
+                                    onClick = {
+                                        menuMenuDesplegable = false
+                                        onToggleMapa(true)
+                                        iniciarUbicacion()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.LocationOn, null) }
+                                )
+                                DropdownMenuItem(
+                                    text = { Text("Opciones de Padrón") },
+                                    onClick = {
+                                        menuMenuDesplegable = false
+                                        onAbrirOpcionesImportacion()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Settings, null) }
+                                )
+                                HorizontalDivider()
+                                DropdownMenuItem(
+                                    text = { Text("Exportar Copia Seguridad") },
+                                    onClick = {
+                                        menuMenuDesplegable = false
+                                        onExportarBackup()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Share, null) }
+                                )
+                            }
                         }
-                        DropdownMenu(
-                            expanded = menuMenuDesplegable,
-                            onDismissRequest = { menuMenuDesplegable = false }
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text("Ver en Mapa Google") },
-                                onClick = {
-                                    menuMenuDesplegable = false
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF455A64))
+                )
+            },
+            bottomBar = {
+                NavigationBar(containerColor = Color.White) {
+                    NavigationBarItem(selected = tabSeleccionada == "inicio", onClick = { tabSeleccionada = "inicio"; miUbicacion = null }, label = { Text(distritoActual) }, icon = { Icon(painterResource(id = R.drawable.ic_home), null, tint = Color.Unspecified) })
+                    NavigationBarItem(selected = tabSeleccionada == "visitas", onClick = { tabSeleccionada = "visitas"; miUbicacion = null }, label = { Text("Visitas") }, icon = { Icon(painterResource(id = R.drawable.ic_check_circle_outline), null, tint = Color.Unspecified) })
+                    NavigationBarItem(selected = false, onClick = { MapaUtils.enviarReporteWhatsApp(context, clientes, visitadosIds) }, label = { Text("Reporte") }, icon = { Icon(painterResource(id = R.drawable.ic_whatsapp), null, tint = Color.Unspecified) })
+                }
+            },
+            floatingActionButton = {
+                if (clientes.isNotEmpty() && !mapaInternoActivado) {
+                    FloatingActionButton(
+                        onClick = {
+                            onToggleMapa(true)
+                            iniciarUbicacion()
+                        },
+                        containerColor = Color(0xFF2196F3),
+                        contentColor = Color.White,
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Icon(Icons.Default.Place, contentDescription = "Ver Mapa")
+                    }
+                }
+            }
+        ) { padding ->
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .background(Color(0xFFC3CED4))
+            ) {
+                Column(Modifier.fillMaxSize()) {
+                    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(8.dp)) {
+                        items(filtrados) { cliente ->
+                            TarjetaCliente(
+                                cliente = cliente, 
+                                yaVisitado = visitadosIds.contains(cliente.codigoSuministro ?: ""), 
+                                miUbicacion = miUbicacion, 
+                                onVerMapa = { 
+                                    onSeleccionarCliente(cliente)
                                     onToggleMapa(true)
                                     iniciarUbicacion()
                                 },
-                                leadingIcon = { Icon(Icons.Default.LocationOn, null) }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Opciones de Padrón") },
-                                onClick = {
-                                    menuMenuDesplegable = false
-                                    onAbrirOpcionesImportacion()
-                                },
-                                leadingIcon = { Icon(Icons.Default.Settings, null) }
-                            )
-                            HorizontalDivider()
-                            DropdownMenuItem(
-                                text = { Text("Exportar Copia Seguridad") },
-                                onClick = {
-                                    menuMenuDesplegable = false
-                                    onExportarBackup()
-                                },
-                                leadingIcon = { Icon(Icons.Default.Share, null) }
+                                onAction = {
+                                    val id = cliente.codigoSuministro ?: return@TarjetaCliente
+                                    if (visitadosIds.contains(id)) VisitaManager.quitarVisita(context, id)
+                                    else VisitaManager.guardarVisita(context, id)
+                                    visitadosIds = VisitaManager.obtenerVisitados(context)
+                                    onUpdateVisitados()
+                                }
                             )
                         }
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF455A64))
-            )
-        },
-        bottomBar = {
-            NavigationBar(containerColor = Color.White) {
-                NavigationBarItem(selected = tabSeleccionada == "inicio", onClick = { tabSeleccionada = "inicio"; miUbicacion = null }, label = { Text(distritoActual) }, icon = { Icon(painterResource(id = R.drawable.ic_home), null, tint = Color.Unspecified) })
-                NavigationBarItem(selected = tabSeleccionada == "visitas", onClick = { tabSeleccionada = "visitas"; miUbicacion = null }, label = { Text("Visitas") }, icon = { Icon(painterResource(id = R.drawable.ic_check_circle_outline), null, tint = Color.Unspecified) })
-                NavigationBarItem(selected = false, onClick = { MapaUtils.enviarReporteWhatsApp(context, clientes, visitadosIds) }, label = { Text("Reporte") }, icon = { Icon(painterResource(id = R.drawable.ic_whatsapp), null, tint = Color.Unspecified) })
-            }
-        },
-        floatingActionButton = {
-            if (clientes.isNotEmpty() && !mapaInternoActivado) {
-                FloatingActionButton(
-                    onClick = {
-                        onToggleMapa(true)
-                        iniciarUbicacion()
-                    },
-                    containerColor = Color(0xFF2196F3),
-                    contentColor = Color.White,
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Icon(Icons.Default.Place, contentDescription = "Ver Mapa")
                 }
             }
         }
-    ) { padding ->
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(padding)
-            .background(Color(0xFFC3CED4))
-        ) {
-            Column(Modifier.fillMaxSize()) {
-                LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(8.dp)) {
-                    items(filtrados) { cliente ->
-                        TarjetaCliente(
-                            cliente = cliente, 
-                            yaVisitado = visitadosIds.contains(cliente.codigoSuministro ?: ""), 
-                            miUbicacion = miUbicacion, 
-                            onVerMapa = { 
-                                onSeleccionarCliente(cliente)
-                                onToggleMapa(true)
-                                iniciarUbicacion()
-                            },
-                            onAction = {
-                                val id = cliente.codigoSuministro ?: return@TarjetaCliente
-                                if (visitadosIds.contains(id)) VisitaManager.quitarVisita(context, id)
-                                else VisitaManager.guardarVisita(context, id)
-                                visitadosIds = VisitaManager.obtenerVisitados(context)
-                                onUpdateVisitados()
-                            }
-                        )
-                    }
-                }
-            }
 
-            if (mapaInternoActivado) {
-                Box(Modifier.fillMaxSize()) {
-                    MapaGoogle(
-                        miUbicacion = miUbicacion, 
-                        clientes = filtrados, 
-                        visitadosIds = visitadosIds,
-                        clienteSeleccionado = clienteSeleccionado,
-                        onToggleVisita = { id ->
-                            if (visitadosIds.contains(id)) VisitaManager.quitarVisita(context, id)
-                            else VisitaManager.guardarVisita(context, id)
-                            onUpdateVisitados()
-                        },
-                        onDismiss = { onToggleMapa(false) }
-                    )
-                }
+        // MAPA EN PANTALLA COMPLETA USANDO SOLO LOS REGISTROS FILTRADOS
+        if (mapaInternoActivado) {
+            Box(Modifier.fillMaxSize().background(Color.Black)) {
+                MapaGoogle(
+                    miUbicacion = miUbicacion, 
+                    clientes = filtrados, 
+                    visitadosIds = visitadosIds,
+                    clienteSeleccionado = clienteSeleccionado,
+                    onToggleVisita = { id ->
+                        if (visitadosIds.contains(id)) VisitaManager.quitarVisita(context, id)
+                        else VisitaManager.guardarVisita(context, id)
+                        onUpdateVisitados()
+                    },
+                    onDismiss = { onToggleMapa(false) }
+                )
             }
         }
     }
